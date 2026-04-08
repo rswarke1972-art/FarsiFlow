@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story | FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<button class="back-btn" onclick="goBack()">← Back</button>
+
+<div class="container">
+  <h1 id="storyTitle">📖 Story</h1>
+
+  <!-- Story content -->
+  <div id="storyContainer" dir="rtl"></div>
+</div>
+
+<!-- Popup -->
+<div id="popup"></div>
+
+<script src="storyViewer.js"></script>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+</body>
+</html>

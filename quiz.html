@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz | FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<button class="back-btn" onclick="goBack()">⬅ Back</button>
+
+<div class="container">
+  <h1>Farsi Quiz 🧪</h1>
+
+  <!-- Quiz Type -->
+  <div class="quiz-types">
+    <button onclick="setQuizType('charToSound')">Letter → Sound</button>
+    <button onclick="setQuizType('soundToChar')">Sound → Letter</button>
+    
+    <!-- 🔥 NEW (for future word system) -->
+    <button onclick="setQuizType('wordToMeaning')">Word → Meaning</button>
+    <button onclick="setQuizType('meaningToWord')">Meaning → Word</button>
+  </div>
+
+  <h2 id="score">Score: 0</h2>
+
+  <!-- Question -->
+  <h2 id="questionChar">?</h2>
+
+  <div id="options"></div>
+
+  <p id="result"></p>
+
+  <button id="nextBtn" onclick="nextQuestion()" style="display:none;">
+    Next
+  </button>
+</div>
+
+<script src="quiz.js"></script>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+
+function setQuizType(type) {
+  localStorage.setItem("quizType", type);
+  location.reload();
+}
+</script>
+
+</body>
+</html>

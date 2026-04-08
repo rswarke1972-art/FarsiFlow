@@ -1,0 +1,58 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<button class="back-btn" onclick="goBack()">⬅ Back</button>
+
+<div class="container">
+  <h1>Contact FarsiFlow 📩</h1>
+
+  <p>
+    Have feedback, suggestions, or found an issue?  
+    I'd love to hear from you 👇
+  </p>
+
+  <!-- Optional: RTL Persian feel -->
+  <form id="contactForm" dir="rtl">
+    <div class="contact-form">
+
+  <input type="text" placeholder="Your Name">
+
+  <input type="email" placeholder="Your Email">
+
+  <textarea placeholder="Your Message"></textarea>
+
+  <button class="contact-btn">Send Message</button>
+
+</div>
+  </form>
+
+  <p id="status"></p>
+</div>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function(){
+  emailjs.init("WOOkqRSQ0vMflbWWI");
+})();
+</script>
+
+<script src="contact.js"></script>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+</body>
+</html>

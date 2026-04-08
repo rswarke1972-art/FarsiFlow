@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>FarsiFlow 🇮🇷</h1>
+
+    <div class="level-buttons">
+
+      <!-- Characters Section -->
+      <button onclick="openCharacters()">Alphabet 🔤</button>
+
+      <!-- Dialects Section -->
+      <button onclick="goToStories()">Story Mode 📖</button>
+
+      <hr>
+
+      <!-- Features -->
+      <button onclick="location.href='quiz.html'">Quiz Mode 🧠</button>
+      <button onclick="location.href='search.html'">Search Word 🔍</button>
+      <button onclick="location.href='contact.html'">Contact 📩</button>
+
+    </div>
+  </div>
+
+  <script>
+
+    // ===== SHOW SELECTED DIALECT =====
+    const dialect = localStorage.getItem("selectedDialect") || "farsi";
+
+    const dialectNames = {
+      farsi: "🇮🇷 Farsi (Iran)",
+      dari: "🇦🇫 Dari (Afghanistan)",
+      pashto: "🇦🇫 Pashto"
+    };
+
+    document.getElementById("currentDialect").innerText =
+      "Current: " + (dialectNames[dialect] || "Farsi");
+
+
+
+    function openCharacters() {
+      localStorage.setItem("level", "basic");
+      window.location.href = "characters.html";
+    }
+
+    function goToStories() {
+  window.location.href = "dialect.html";
+}
+
+  </script>
+
+</body>
+</html>

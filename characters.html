@@ -1,0 +1,29 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarsiFlow - Characters</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+  <div class="container">
+    <h1>Persian (Farsi) Alphabet 🔤</h1>
+
+    <!-- Character List -->
+    <div id="characterList" dir="rtl"></div>
+  </div>
+
+  <script src="characters.js"></script>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+
+</body>
+</html>

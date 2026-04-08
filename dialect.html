@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Languages | FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<button class="back-btn" onclick="goBack()">← Back</button>
+
+<div class="container">
+  <h2>🌍 Select Language</h2>
+  <p>Choose a language to start learning:</p>
+
+  <div class="level-buttons">
+
+    <button onclick="selectLanguage('farsi')">
+      🇮🇷 Farsi (Iran)
+    </button>
+
+    <button onclick="selectLanguage('dari')">
+      🇦🇫 Dari (Afghanistan)
+    </button>
+
+    <button onclick="selectLanguage('pashto')">
+      🇦🇫 Pashto
+    </button>
+
+  </div>
+</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+
+// ✅ SELECT LANGUAGE
+function selectLanguage(type) {
+  localStorage.setItem("selectedDialect", type);
+
+  // optional debug
+  console.log("Selected:", type);
+
+  // go to stories
+  window.location.href = "stories.html";
+}
+</script>
+
+</body>
+</html>

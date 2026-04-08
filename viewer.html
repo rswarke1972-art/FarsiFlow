@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewer | FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" autoplay loop>
+  <source src="flute.mp3" type="audio/mpeg">
+</audio>
+
+<button class="back-btn" onclick="goBack()">← Back</button>
+
+<div class="container">
+
+  <!-- 🎵 Music Toggle -->
+  <button class="action-btn" onclick="toggleMusic()">🎵 Music</button>
+
+  <!-- 🔥 MAIN VIEWER CARD -->
+  <div class="viewer-card">
+
+    <!-- 🔤 Character -->
+    <h1 id="charDisplay"></h1>
+
+    <!-- 🔊 Sound -->
+    <p id="infoDisplay" class="info-text"></p>
+
+    <!-- 🧩 FORMS -->
+    <div class="forms-container">
+
+      <!-- Isolated -->
+      <div class="form-card">
+        <h3>Isolated</h3>
+        <div class="form-char" id="isoChar"></div>
+        <p id="isoExample" class="example-text"></p>
+      </div>
+
+      <!-- Initial -->
+      <div class="form-card">
+        <h3>Initial</h3>
+        <div class="form-char" id="initChar"></div>
+        <p id="initExample" class="example-text"></p>
+      </div>
+
+      <!-- Medial -->
+      <div class="form-card">
+        <h3>Medial</h3>
+        <div class="form-char" id="medChar"></div>
+        <p id="medExample" class="example-text"></p>
+      </div>
+
+      <!-- Final -->
+      <div class="form-card">
+        <h3>Final</h3>
+        <div class="form-char" id="finChar"></div>
+        <p id="finExample" class="example-text"></p>
+      </div>
+
+    </div>
+
+    <!-- 🔊 ACTION -->
+    <button class="action-btn" onclick="playSound()">🔊 Play Sound</button>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+
+function toggleMusic() {
+  const music = document.getElementById("bgMusic");
+  if (music.paused) music.play();
+  else music.pause();
+}
+</script>
+
+</body>
+</html>

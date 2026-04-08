@@ -1,0 +1,1493 @@
+{
+  "characters": [
+    {
+  "char": "ا",
+  "sound": "â / a",
+  "isolated": "ا",
+  "initial": "ا",
+  "medial": "ـا",
+  "final": "ـا",
+  "examples": {
+    "isolated": {
+      "word": "آب (âb)",
+      "meaning": "water"
+    },
+    "initial": {
+      "word": "امید (omid)",
+      "meaning": "hope"
+    },
+    "medial": {
+      "word": "کتاب (ketâb)",
+      "meaning": "book"
+    },
+    "final": {
+      "word": "هوا (havâ)",
+      "meaning": "air"
+    }
+  }
+},
+{
+  "char": "ب",
+  "sound": "b",
+  "isolated": "ب",
+  "initial": "بـ",
+  "medial": "ـبـ",
+  "final": "ـب",
+  "examples": {
+    "isolated": {
+      "word": "برف (barf)",
+      "meaning": "snow"
+    },
+    "initial": {
+      "word": "بزرگ (bozorg)",
+      "meaning": "big"
+    },
+    "medial": {
+      "word": "کتاب (ketâb)",
+      "meaning": "book"
+    },
+    "final": {
+      "word": "شب (shab)",
+      "meaning": "night"
+    }
+  }
+},
+{
+  "char": "پ",
+  "sound": "p",
+  "isolated": "پ",
+  "initial": "پـ",
+  "medial": "ـپـ",
+  "final": "ـپ",
+  "examples": {
+    "isolated": {
+      "word": "پدر (pedar)",
+      "meaning": "father"
+    },
+    "initial": {
+      "word": "پول (pul)",
+      "meaning": "money"
+    },
+    "medial": {
+      "word": "سپاس (sepâs)",
+      "meaning": "thanks"
+    },
+    "final": {
+      "word": "لب (lab)",
+      "meaning": "lip"
+    }
+  }
+},
+{
+  "char": "ت",
+  "sound": "t",
+  "isolated": "ت",
+  "initial": "تـ",
+  "medial": "ـتـ",
+  "final": "ـت",
+  "examples": {
+    "isolated": {
+      "word": "تو (to)",
+      "meaning": "you"
+    },
+    "initial": {
+      "word": "تمیز (tamiz)",
+      "meaning": "clean"
+    },
+    "medial": {
+      "word": "کتاب (ketâb)",
+      "meaning": "book"
+    },
+    "final": {
+      "word": "وقت (vaqt)",
+      "meaning": "time"
+    }
+  }
+},
+{
+  "char": "ث",
+  "sound": "s",
+  "isolated": "ث",
+  "initial": "ثـ",
+  "medial": "ـثـ",
+  "final": "ـث",
+  "examples": {
+    "isolated": {
+      "word": "ثروت (servat)",
+      "meaning": "wealth"
+    },
+    "initial": {
+      "word": "ثابت (sâbet)",
+      "meaning": "stable"
+    },
+    "medial": {
+      "word": "مثال (mesâl)",
+      "meaning": "example"
+    },
+    "final": {
+      "word": "بحث (bahs)",
+      "meaning": "discussion"
+    }
+  }
+},
+{
+  "char": "ج",
+  "sound": "j",
+  "isolated": "ج",
+  "initial": "جـ",
+  "medial": "ـجـ",
+  "final": "ـج",
+  "examples": {
+    "isolated": {
+      "word": "جنگ (jang)",
+      "meaning": "war"
+    },
+    "initial": {
+      "word": "جوان (javân)",
+      "meaning": "young"
+    },
+    "medial": {
+      "word": "اجازه (ejâze)",
+      "meaning": "permission"
+    },
+    "final": {
+      "word": "برج (borj)",
+      "meaning": "tower"
+    }
+  }
+},
+{
+  "char": "چ",
+  "sound": "ch",
+  "isolated": "چ",
+  "initial": "چـ",
+  "medial": "ـچـ",
+  "final": "ـچ",
+  "examples": {
+    "isolated": {
+      "word": "چای (chây)",
+      "meaning": "tea"
+    },
+    "initial": {
+      "word": "چشم (cheshm)",
+      "meaning": "eye"
+    },
+    "medial": {
+      "word": "بچه (bache)",
+      "meaning": "child"
+    },
+    "final": {
+      "word": "هیچ (hich)",
+      "meaning": "none"
+    }
+  }
+},
+{
+  "char": "ح",
+  "sound": "h",
+  "isolated": "ح",
+  "initial": "حـ",
+  "medial": "ـحـ",
+  "final": "ـح",
+  "examples": {
+    "isolated": {
+      "word": "حال (hâl)",
+      "meaning": "state"
+    },
+    "initial": {
+      "word": "حرف (harf)",
+      "meaning": "letter"
+    },
+    "medial": {
+      "word": "محبت (mohabbat)",
+      "meaning": "love"
+    },
+    "final": {
+      "word": "صبح (sobh)",
+      "meaning": "morning"
+    }
+  }
+},
+{
+  "char": "خ",
+  "sound": "kh",
+  "isolated": "خ",
+  "initial": "خـ",
+  "medial": "ـخـ",
+  "final": "ـخ",
+  "examples": {
+    "isolated": {
+      "word": "خانه (khâne)",
+      "meaning": "house"
+    },
+    "initial": {
+      "word": "خوب (khub)",
+      "meaning": "good"
+    },
+    "medial": {
+      "word": "بخشی (bakhshi)",
+      "meaning": "part"
+    },
+    "final": {
+      "word": "شیخ (sheikh)",
+      "meaning": "elder"
+    }
+  }
+},
+{
+  "char": "د",
+  "sound": "d",
+  "isolated": "د",
+  "initial": "د",
+  "medial": "ـد",
+  "final": "ـد",
+  "examples": {
+    "isolated": {
+      "word": "در (dar)",
+      "meaning": "door"
+    },
+    "initial": {
+      "word": "دست (dast)",
+      "meaning": "hand"
+    },
+    "medial": {
+      "word": "مدرسه (madrese)",
+      "meaning": "school"
+    },
+    "final": {
+      "word": "باد (bâd)",
+      "meaning": "wind"
+    }
+  }
+},
+{
+  "char": "ذ",
+  "sound": "z",
+  "isolated": "ذ",
+  "initial": "ذ",
+  "medial": "ـذ",
+  "final": "ـذ",
+  "examples": {
+    "isolated": {
+      "word": "ذهن (zehn)",
+      "meaning": "mind"
+    },
+    "initial": {
+      "word": "ذاتی (zâti)",
+      "meaning": "intrinsic"
+    },
+    "medial": {
+      "word": "مذهب (mazhab)",
+      "meaning": "religion"
+    },
+    "final": {
+      "word": "لذذ (lazzat)",
+      "meaning": "pleasure"
+    }
+  }
+},
+{
+  "char": "ر",
+  "sound": "r",
+  "isolated": "ر",
+  "initial": "ر",
+  "medial": "ـر",
+  "final": "ـر",
+  "examples": {
+    "isolated": {
+      "word": "راه (râh)",
+      "meaning": "road"
+    },
+    "initial": {
+      "word": "روز (ruz)",
+      "meaning": "day"
+    },
+    "medial": {
+      "word": "برادر (barâdar)",
+      "meaning": "brother"
+    },
+    "final": {
+      "word": "کار (kâr)",
+      "meaning": "work"
+    }
+  }
+},
+{
+  "char": "ز",
+  "sound": "z",
+  "isolated": "ز",
+  "initial": "ز",
+  "medial": "ـز",
+  "final": "ـز",
+  "examples": {
+    "isolated": {
+      "word": "زن (zan)",
+      "meaning": "woman"
+    },
+    "initial": {
+      "word": "زمین (zamin)",
+      "meaning": "earth"
+    },
+    "medial": {
+      "word": "بزرگ (bozorg)",
+      "meaning": "big"
+    },
+    "final": {
+      "word": "راز (râz)",
+      "meaning": "secret"
+    }
+  }
+},
+{
+  "char": "ژ",
+  "sound": "zh",
+  "isolated": "ژ",
+  "initial": "ژ",
+  "medial": "ـژ",
+  "final": "ـژ",
+  "examples": {
+    "isolated": {
+      "word": "ژاله (zhâle)",
+      "meaning": "dew"
+    },
+    "initial": {
+      "word": "ژورنال (zhurnal)",
+      "meaning": "journal"
+    },
+    "medial": {
+      "word": "مژده (mozhde)",
+      "meaning": "good news"
+    },
+    "final": {
+      "word": "بژ (bezh)",
+      "meaning": "beige"
+    }
+  }
+},
+{
+  "char": "س",
+  "sound": "s",
+  "isolated": "س",
+  "initial": "سـ",
+  "medial": "ـسـ",
+  "final": "ـس",
+  "examples": {
+    "isolated": {
+      "word": "سیب (sib)",
+      "meaning": "apple"
+    },
+    "initial": {
+      "word": "سلام (salâm)",
+      "meaning": "hello"
+    },
+    "medial": {
+      "word": "مسیر (masir)",
+      "meaning": "path"
+    },
+    "final": {
+      "word": "درس (dars)",
+      "meaning": "lesson"
+    }
+  }
+},
+{
+  "char": "ش",
+  "sound": "sh",
+  "isolated": "ش",
+  "initial": "شـ",
+  "medial": "ـشـ",
+  "final": "ـش",
+  "examples": {
+    "isolated": {
+      "word": "شب (shab)",
+      "meaning": "night"
+    },
+    "initial": {
+      "word": "شهر (shahr)",
+      "meaning": "city"
+    },
+    "medial": {
+      "word": "باشه (bâshe)",
+      "meaning": "okay"
+    },
+    "final": {
+      "word": "آتش (âtash)",
+      "meaning": "fire"
+    }
+  }
+},
+{
+  "char": "ص",
+  "sound": "s",
+  "isolated": "ص",
+  "initial": "صـ",
+  "medial": "ـصـ",
+  "final": "ـص",
+  "examples": {
+    "isolated": {
+      "word": "صبح (sobh)",
+      "meaning": "morning"
+    },
+    "initial": {
+      "word": "صدا (sedâ)",
+      "meaning": "sound"
+    },
+    "medial": {
+      "word": "قصد (qasd)",
+      "meaning": "intention"
+    },
+    "final": {
+      "word": "نقص (naqs)",
+      "meaning": "defect"
+    }
+  }
+},
+{
+  "char": "ض",
+  "sound": "z",
+  "isolated": "ض",
+  "initial": "ضـ",
+  "medial": "ـضـ",
+  "final": "ـض",
+  "examples": {
+    "isolated": {
+      "word": "ضرب (zarb)",
+      "meaning": "multiplication"
+    },
+    "initial": {
+      "word": "ضد (zedd)",
+      "meaning": "against"
+    },
+    "medial": {
+      "word": "موضوع (mozoo)",
+      "meaning": "topic"
+    },
+    "final": {
+      "word": "فرض (farz)",
+      "meaning": "assumption"
+    }
+  }
+},
+{
+  "char": "ط",
+  "sound": "t",
+  "isolated": "ط",
+  "initial": "طـ",
+  "medial": "ـطـ",
+  "final": "ـط",
+  "examples": {
+    "isolated": {
+      "word": "طلا (talâ)",
+      "meaning": "gold"
+    },
+    "initial": {
+      "word": "طبیب (tabib)",
+      "meaning": "doctor"
+    },
+    "medial": {
+      "word": "خطا (khatâ)",
+      "meaning": "mistake"
+    },
+    "final": {
+      "word": "شرط (shart)",
+      "meaning": "condition"
+    }
+  }
+},
+{
+  "char": "ظ",
+  "sound": "z",
+  "isolated": "ظ",
+  "initial": "ظـ",
+  "medial": "ـظـ",
+  "final": "ـظ",
+  "examples": {
+    "isolated": {
+      "word": "ظرف (zarf)",
+      "meaning": "container"
+    },
+    "initial": {
+      "word": "ظاهر (zâher)",
+      "meaning": "appearance"
+    },
+    "medial": {
+      "word": "نظری (nazari)",
+      "meaning": "theoretical"
+    },
+    "final": {
+      "word": "حفظ (hefz)",
+      "meaning": "memorization"
+    }
+  }
+},
+{
+  "char": "ع",
+  "sound": "’ / a",
+  "isolated": "ع",
+  "initial": "عـ",
+  "medial": "ـعـ",
+  "final": "ـع",
+  "examples": {
+    "isolated": {
+      "word": "عشق (eshgh)",
+      "meaning": "love"
+    },
+    "initial": {
+      "word": "علم (elm)",
+      "meaning": "knowledge"
+    },
+    "medial": {
+      "word": "ساعت (sâ'at)",
+      "meaning": "hour"
+    },
+    "final": {
+      "word": "نوع (no')",
+      "meaning": "type"
+    }
+  }
+},
+{
+  "char": "غ",
+  "sound": "gh",
+  "isolated": "غ",
+  "initial": "غـ",
+  "medial": "ـغـ",
+  "final": "ـغ",
+  "examples": {
+    "isolated": {
+      "word": "غذا (ghazâ)",
+      "meaning": "food"
+    },
+    "initial": {
+      "word": "غروب (ghorub)",
+      "meaning": "sunset"
+    },
+    "medial": {
+      "word": "باغ (bâgh)",
+      "meaning": "garden"
+    },
+    "final": {
+      "word": "داغ (dâgh)",
+      "meaning": "hot"
+    }
+  }
+},
+{
+  "char": "ف",
+  "sound": "f",
+  "isolated": "ف",
+  "initial": "فـ",
+  "medial": "ـفـ",
+  "final": "ـف",
+  "examples": {
+    "isolated": {
+      "word": "فیل (fil)",
+      "meaning": "elephant"
+    },
+    "initial": {
+      "word": "فرد (fard)",
+      "meaning": "person"
+    },
+    "medial": {
+      "word": "کفش (kafsh)",
+      "meaning": "shoe"
+    },
+    "final": {
+      "word": "برف (barf)",
+      "meaning": "snow"
+    }
+  }
+},
+{
+  "char": "ق",
+  "sound": "gh",
+  "isolated": "ق",
+  "initial": "قـ",
+  "medial": "ـقـ",
+  "final": "ـق",
+  "examples": {
+    "isolated": {
+      "word": "قلب (ghalb)",
+      "meaning": "heart"
+    },
+    "initial": {
+      "word": "قلم (ghalam)",
+      "meaning": "pen"
+    },
+    "medial": {
+      "word": "عقل (aghl)",
+      "meaning": "mind"
+    },
+    "final": {
+      "word": "حق (hagh)",
+      "meaning": "right/truth"
+    }
+  }
+},
+{
+  "char": "ک",
+  "sound": "k",
+  "isolated": "ک",
+  "initial": "کـ",
+  "medial": "ـکـ",
+  "final": "ـک",
+  "examples": {
+    "isolated": {
+      "word": "کتاب (ketâb)",
+      "meaning": "book"
+    },
+    "initial": {
+      "word": "کار (kâr)",
+      "meaning": "work"
+    },
+    "medial": {
+      "word": "باکس (bâks)",
+      "meaning": "box"
+    },
+    "final": {
+      "word": "نمک (namak)",
+      "meaning": "salt"
+    }
+  }
+},
+{
+  "char": "گ",
+  "sound": "g",
+  "isolated": "گ",
+  "initial": "گـ",
+  "medial": "ـگـ",
+  "final": "ـگ",
+  "examples": {
+    "isolated": {
+      "word": "گل (gol)",
+      "meaning": "flower"
+    },
+    "initial": {
+      "word": "گوش (gush)",
+      "meaning": "ear"
+    },
+    "medial": {
+      "word": "بگو (begu)",
+      "meaning": "say"
+    },
+    "final": {
+      "word": "رنگ (rang)",
+      "meaning": "color"
+    }
+  }
+},
+{
+  "char": "ل",
+  "sound": "l",
+  "isolated": "ل",
+  "initial": "لـ",
+  "medial": "ـلـ",
+  "final": "ـل",
+  "examples": {
+    "isolated": {
+      "word": "لب (lab)",
+      "meaning": "lip"
+    },
+    "initial": {
+      "word": "لباس (lebâs)",
+      "meaning": "clothes"
+    },
+    "medial": {
+      "word": "سلام (salâm)",
+      "meaning": "hello"
+    },
+    "final": {
+      "word": "گل (gol)",
+      "meaning": "flower"
+    }
+  }
+},
+{
+  "char": "م",
+  "sound": "m",
+  "isolated": "م",
+  "initial": "مـ",
+  "medial": "ـمـ",
+  "final": "ـم",
+  "examples": {
+    "isolated": {
+      "word": "ما (mâ)",
+      "meaning": "we"
+    },
+    "initial": {
+      "word": "مادر (mâdar)",
+      "meaning": "mother"
+    },
+    "medial": {
+      "word": "تمام (tamâm)",
+      "meaning": "complete"
+    },
+    "final": {
+      "word": "نام (nâm)",
+      "meaning": "name"
+    }
+  }
+},
+{
+  "char": "ن",
+  "sound": "n",
+  "isolated": "ن",
+  "initial": "نـ",
+  "medial": "ـنـ",
+  "final": "ـن",
+  "examples": {
+    "isolated": {
+      "word": "نه (na)",
+      "meaning": "no"
+    },
+    "initial": {
+      "word": "نور (nur)",
+      "meaning": "light"
+    },
+    "medial": {
+      "word": "خانه (khâne)",
+      "meaning": "house"
+    },
+    "final": {
+      "word": "من (man)",
+      "meaning": "me"
+    }
+  }
+},
+{
+  "char": "و",
+  "sound": "v / o / u",
+  "isolated": "و",
+  "initial": "و",
+  "medial": "ـو",
+  "final": "ـو",
+  "examples": {
+    "isolated": {
+      "word": "و (va)",
+      "meaning": "and"
+    },
+    "initial": {
+      "word": "وقت (vaqt)",
+      "meaning": "time"
+    },
+    "medial": {
+      "word": "خواب (khâb)",
+      "meaning": "sleep"
+    },
+    "final": {
+      "word": "نو (no)",
+      "meaning": "new"
+    }
+  }
+},
+{
+  "char": "ه",
+  "sound": "h",
+  "isolated": "ه",
+  "initial": "هـ",
+  "medial": "ـهـ",
+  "final": "ـه",
+  "examples": {
+    "isolated": {
+      "word": "هوا (havâ)",
+      "meaning": "air"
+    },
+    "initial": {
+      "word": "همه (hame)",
+      "meaning": "all"
+    },
+    "medial": {
+      "word": "بهار (bahâr)",
+      "meaning": "spring"
+    },
+    "final": {
+      "word": "خانه (khâne)",
+      "meaning": "house"
+    }
+  }
+},
+{
+  "char": "ی",
+  "sound": "y / i",
+  "isolated": "ی",
+  "initial": "یـ",
+  "medial": "ـیـ",
+  "final": "ـی",
+  "examples": {
+    "isolated": {
+      "word": "یک (yek)",
+      "meaning": "one"
+    },
+    "initial": {
+      "word": "یار (yâr)",
+      "meaning": "friend"
+    },
+    "medial": {
+      "word": "بیرون (birun)",
+      "meaning": "outside"
+    },
+    "final": {
+      "word": "خوبی (khubi)",
+      "meaning": "goodness"
+    }
+  }
+}
+  ],
+
+  "stories": {
+    "farsi":{
+      "story1":{
+  "title": "یک روز در پارک (yek ruz dar park)",
+  "content": [
+    { "word": "یک (yek)", "meaning": "a" },
+    { "word": "روز (ruz)", "meaning": "day" },
+    { "word": "زیبا (zibâ)", "meaning": "beautiful" },
+
+    { "word": "یک (yek)", "meaning": "a" },
+    { "word": "پسر (pesar)", "meaning": "boy" },
+    { "word": "کوچک (kuchak)", "meaning": "small" },
+    { "word": "به (be)", "meaning": "to" },
+    { "word": "پارک (park)", "meaning": "park" },
+    { "word": "رفت (raft)", "meaning": "went" },
+
+    { "word": "او (u)", "meaning": "he" },
+    { "word": "با (bâ)", "meaning": "with" },
+    { "word": "دوست (dust)", "meaning": "friend" },
+    { "word": "خود (khod)", "meaning": "his" },
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "پارک (park)", "meaning": "park" },
+    { "word": "بازی (bâzi)", "meaning": "play" },
+    { "word": "کرد (kard)", "meaning": "did" },
+
+    { "word": "آن‌ها (anhâ)", "meaning": "they" },
+    { "word": "زیر (zir)", "meaning": "under" },
+    { "word": "درخت (derakht)", "meaning": "tree" },
+    { "word": "بزرگ (bozorg)", "meaning": "big" },
+    { "word": "نشستند (neshastand)", "meaning": "sat" },
+
+    { "word": "پسر (pesar)", "meaning": "boy" },
+    { "word": "یک (yek)", "meaning": "a" },
+    { "word": "سیب (sib)", "meaning": "apple" },
+    { "word": "قرمز (ghermez)", "meaning": "red" },
+    { "word": "خورد (khord)", "meaning": "ate" },
+
+    { "word": "و (va)", "meaning": "and" },
+    { "word": "آب (âb)", "meaning": "water" },
+    { "word": "نوشید (nushid)", "meaning": "drank" },
+
+    { "word": "پرنده‌ها (parandehâ)", "meaning": "birds" },
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "آسمان (âsemân)", "meaning": "sky" },
+    { "word": "پرواز (parvâz)", "meaning": "fly" },
+    { "word": "می‌کردند (mikardand)", "meaning": "were doing" },
+
+    { "word": "آن‌ها (anhâ)", "meaning": "they" },
+    { "word": "بسیار (besyâr)", "meaning": "very" },
+    { "word": "خوشحال (khoshhâl)", "meaning": "happy" },
+    { "word": "بودند (budand)", "meaning": "were" },
+
+    { "word": "بعد (ba'd)", "meaning": "after" },
+    { "word": "از (az)", "meaning": "from" },
+    { "word": "چند (chand)", "meaning": "some" },
+    { "word": "ساعت (sâ'at)", "meaning": "hours" },
+
+    { "word": "آن‌ها (anhâ)", "meaning": "they" },
+    { "word": "به (be)", "meaning": "to" },
+    { "word": "خانه (khâne)", "meaning": "home" },
+    { "word": "بازگشتند (bâzgashtand)", "meaning": "returned" }
+  ]
+},
+"story2": {
+  "title": "در مدرسه (dar madrese)",
+  "content": [
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "هر (har)", "meaning": "every" },
+    { "word": "روز (ruz)", "meaning": "day" },
+    { "word": "به (be)", "meaning": "to" },
+    { "word": "مدرسه (madrese)", "meaning": "school" },
+    { "word": "می‌روم (miravam)", "meaning": "go" },
+
+    { "word": "مدرسه (madrese)", "meaning": "school" },
+    { "word": "من (man)", "meaning": "my" },
+    { "word": "بزرگ (bozorg)", "meaning": "big" },
+    { "word": "و (va)", "meaning": "and" },
+    { "word": "زیبا (zibâ)", "meaning": "beautiful" },
+    { "word": "است (ast)", "meaning": "is" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "با (bâ)", "meaning": "with" },
+    { "word": "دوستان (dustân)", "meaning": "friends" },
+    { "word": "خود (khod)", "meaning": "my" },
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "کلاس (kelâs)", "meaning": "class" },
+    { "word": "می‌نشینم (mineshinam)", "meaning": "sit" },
+
+    { "word": "معلم (mo'allem)", "meaning": "teacher" },
+    { "word": "ما (mâ)", "meaning": "our" },
+    { "word": "خیلی (kheili)", "meaning": "very" },
+    { "word": "خوب (khub)", "meaning": "good" },
+    { "word": "است (ast)", "meaning": "is" },
+
+    { "word": "او (u)", "meaning": "he/she" },
+    { "word": "به (be)", "meaning": "to" },
+    { "word": "ما (mâ)", "meaning": "us" },
+    { "word": "درس (dars)", "meaning": "lesson" },
+    { "word": "می‌دهد (midahad)", "meaning": "teaches" },
+
+    { "word": "ما (mâ)", "meaning": "we" },
+    { "word": "کتاب (ketâb)", "meaning": "book" },
+    { "word": "می‌خوانیم (mikhânim)", "meaning": "read" },
+    { "word": "و (va)", "meaning": "and" },
+    { "word": "می‌نویسیم (minevisim)", "meaning": "write" },
+
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "زنگ (zang)", "meaning": "break" },
+    { "word": "تفریح (tafrih)", "meaning": "playtime" },
+    { "word": "با (bâ)", "meaning": "with" },
+    { "word": "دوستان (dustân)", "meaning": "friends" },
+    { "word": "بازی (bâzi)", "meaning": "play" },
+    { "word": "می‌کنیم (mikonim)", "meaning": "do" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "مدرسه (madrese)", "meaning": "school" },
+    { "word": "را (râ)", "meaning": "(object marker)" },
+    { "word": "خیلی (kheili)", "meaning": "very" },
+    { "word": "دوست (dust)", "meaning": "like" },
+    { "word": "دارم (dâram)", "meaning": "have" }
+  ]
+},
+"story3": {
+  "title": "در خانه (dar khâne)",
+  "content": [
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "خانه (khâne)", "meaning": "home" },
+    { "word": "خود (khod)", "meaning": "my" },
+    { "word": "هستم (hastam)", "meaning": "am" },
+
+    { "word": "خانه (khâne)", "meaning": "home" },
+    { "word": "ما (mâ)", "meaning": "our" },
+    { "word": "بزرگ (bozorg)", "meaning": "big" },
+    { "word": "و (va)", "meaning": "and" },
+    { "word": "زیبا (zibâ)", "meaning": "beautiful" },
+    { "word": "است (ast)", "meaning": "is" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "با (bâ)", "meaning": "with" },
+    { "word": "خانواده (khânevâde)", "meaning": "family" },
+    { "word": "خود (khod)", "meaning": "my" },
+    { "word": "زندگی (zendegi)", "meaning": "live" },
+    { "word": "می‌کنم (mikonam)", "meaning": "do" },
+
+    { "word": "مادر (mâdar)", "meaning": "mother" },
+    { "word": "من (man)", "meaning": "my" },
+    { "word": "غذا (ghazâ)", "meaning": "food" },
+    { "word": "می‌پزد (mipazad)", "meaning": "cooks" },
+
+    { "word": "پدر (pedar)", "meaning": "father" },
+    { "word": "من (man)", "meaning": "my" },
+    { "word": "کار (kâr)", "meaning": "work" },
+    { "word": "می‌کند (mikonad)", "meaning": "does" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "اتاق (otâgh)", "meaning": "room" },
+    { "word": "خود (khod)", "meaning": "my" },
+    { "word": "درس (dars)", "meaning": "study" },
+    { "word": "می‌خوانم (mikhânam)", "meaning": "read" },
+
+    { "word": "بعد (ba'd)", "meaning": "after" },
+    { "word": "از (az)", "meaning": "from" },
+    { "word": "آن (ân)", "meaning": "that" },
+    { "word": "تلویزیون (televizion)", "meaning": "television" },
+    { "word": "تماشا (tamâshâ)", "meaning": "watch" },
+    { "word": "می‌کنم (mikonam)", "meaning": "do" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "خانه (khâne)", "meaning": "home" },
+    { "word": "را (râ)", "meaning": "(object marker)" },
+    { "word": "خیلی (kheili)", "meaning": "very" },
+    { "word": "دوست (dust)", "meaning": "like" },
+    { "word": "دارم (dâram)", "meaning": "have" }
+  ]
+},
+"story4": {
+  "title": "در بازار (dar bâzâr)",
+  "content": [
+    { "word": "امروز (emruz)", "meaning": "today" },
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "به (be)", "meaning": "to" },
+    { "word": "بازار (bâzâr)", "meaning": "market" },
+    { "word": "می‌روم (miravam)", "meaning": "go" },
+
+    { "word": "بازار (bâzâr)", "meaning": "market" },
+    { "word": "خیلی (kheili)", "meaning": "very" },
+    { "word": "شلوغ (sholugh)", "meaning": "crowded" },
+    { "word": "است (ast)", "meaning": "is" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "میوه (mive)", "meaning": "fruit" },
+    { "word": "و (va)", "meaning": "and" },
+    { "word": "سبزی (sabzi)", "meaning": "vegetables" },
+    { "word": "می‌خرم (mikharam)", "meaning": "buy" },
+
+    { "word": "سیب (sib)", "meaning": "apple" },
+    { "word": "قرمز (ghermez)", "meaning": "red" },
+    { "word": "و (va)", "meaning": "and" },
+    { "word": "موز (moz)", "meaning": "banana" },
+    { "word": "زرد (zard)", "meaning": "yellow" },
+    { "word": "می‌خرم (mikharam)", "meaning": "buy" },
+
+    { "word": "فروشنده (forushande)", "meaning": "seller" },
+    { "word": "با (bâ)", "meaning": "with" },
+    { "word": "من (man)", "meaning": "me" },
+    { "word": "صحبت (sohbat)", "meaning": "talk" },
+    { "word": "می‌کند (mikonad)", "meaning": "does" },
+
+    { "word": "او (u)", "meaning": "he/she" },
+    { "word": "خیلی (kheili)", "meaning": "very" },
+    { "word": "مهربان (mehrabân)", "meaning": "kind" },
+    { "word": "است (ast)", "meaning": "is" },
+
+    { "word": "بعد (ba'd)", "meaning": "after" },
+    { "word": "از (az)", "meaning": "from" },
+    { "word": "خرید (kharid)", "meaning": "shopping" },
+    { "word": "به (be)", "meaning": "to" },
+    { "word": "خانه (khâne)", "meaning": "home" },
+    { "word": "برمی‌گردم (barmigardam)", "meaning": "return" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "از (az)", "meaning": "from" },
+    { "word": "بازار (bâzâr)", "meaning": "market" },
+    { "word": "خیلی (kheili)", "meaning": "very" },
+    { "word": "خوشحال (khoshhâl)", "meaning": "happy" },
+    { "word": "هستم (hastam)", "meaning": "am" }
+  ]
+},
+"story5": {
+  "title": "در سفر (dar safar)",
+  "content": [
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "با (bâ)", "meaning": "with" },
+    { "word": "خانواده (khânevâde)", "meaning": "family" },
+    { "word": "خود (khod)", "meaning": "my" },
+    { "word": "به (be)", "meaning": "to" },
+    { "word": "سفر (safar)", "meaning": "trip" },
+    { "word": "می‌روم (miravam)", "meaning": "go" },
+
+    { "word": "ما (mâ)", "meaning": "we" },
+    { "word": "به (be)", "meaning": "to" },
+    { "word": "یک (yek)", "meaning": "a" },
+    { "word": "شهر (shahr)", "meaning": "city" },
+    { "word": "زیبا (zibâ)", "meaning": "beautiful" },
+    { "word": "می‌رویم (miravim)", "meaning": "go" },
+
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "آنجا (ânjâ)", "meaning": "there" },
+    { "word": "هتل (hotel)", "meaning": "hotel" },
+    { "word": "می‌مانیم (mimânim)", "meaning": "stay" },
+
+    { "word": "ما (mâ)", "meaning": "we" },
+    { "word": "جاهای (jâhâ-ye)", "meaning": "places" },
+    { "word": "زیادی (ziyâdi)", "meaning": "many" },
+    { "word": "را (râ)", "meaning": "(object marker)" },
+    { "word": "می‌بینیم (mibinim)", "meaning": "see" },
+
+    { "word": "پارک (park)", "meaning": "park" },
+    { "word": "و (va)", "meaning": "and" },
+    { "word": "موزه (muze)", "meaning": "museum" },
+    { "word": "خیلی (kheili)", "meaning": "very" },
+    { "word": "جالب (jâleb)", "meaning": "interesting" },
+    { "word": "هستند (hastand)", "meaning": "are" },
+
+    { "word": "ما (mâ)", "meaning": "we" },
+    { "word": "عکس (aks)", "meaning": "photos" },
+    { "word": "می‌گیریم (migirim)", "meaning": "take" },
+
+    { "word": "و (va)", "meaning": "and" },
+    { "word": "غذا (ghazâ)", "meaning": "food" },
+    { "word": "خوشمزه (khoshmaze)", "meaning": "delicious" },
+    { "word": "می‌خوریم (mikhorim)", "meaning": "eat" },
+
+    { "word": "این (in)", "meaning": "this" },
+    { "word": "سفر (safar)", "meaning": "trip" },
+    { "word": "خیلی (kheili)", "meaning": "very" },
+    { "word": "خوب (khub)", "meaning": "good" },
+    { "word": "است (ast)", "meaning": "is" }
+  ]
+},
+"story6": {
+  "title": "یک روز بارانی (yek ruz bârâni)",
+  "content": [
+    { "word": "امروز (emruz)", "meaning": "today" },
+    { "word": "هوا (havâ)", "meaning": "weather" },
+    { "word": "بارانی (bârâni)", "meaning": "rainy" },
+    { "word": "است (ast)", "meaning": "is" },
+
+    { "word": "باران (bârân)", "meaning": "rain" },
+    { "word": "زیاد (ziyâd)", "meaning": "a lot" },
+    { "word": "می‌بارد (mibârad)", "meaning": "rains" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "خانه (khâne)", "meaning": "home" },
+    { "word": "می‌مانم (mimânam)", "meaning": "stay" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "چای (chây)", "meaning": "tea" },
+    { "word": "داغ (dâgh)", "meaning": "hot" },
+    { "word": "می‌نوشم (minusham)", "meaning": "drink" },
+
+    { "word": "و (va)", "meaning": "and" },
+    { "word": "کتاب (ketâb)", "meaning": "book" },
+    { "word": "می‌خوانم (mikhânam)", "meaning": "read" },
+
+    { "word": "صدای (sedâ-ye)", "meaning": "sound of" },
+    { "word": "باران (bârân)", "meaning": "rain" },
+    { "word": "خیلی (kheili)", "meaning": "very" },
+    { "word": "آرام (ârâm)", "meaning": "calm" },
+    { "word": "است (ast)", "meaning": "is" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "احساس (ehsâs)", "meaning": "feel" },
+    { "word": "خوب (khub)", "meaning": "good" },
+    { "word": "دارم (dâram)", "meaning": "have" },
+
+    { "word": "بعد (ba'd)", "meaning": "after" },
+    { "word": "از (az)", "meaning": "from" },
+    { "word": "مدتی (moddati)", "meaning": "some time" },
+    { "word": "باران (bârân)", "meaning": "rain" },
+    { "word": "کم (kam)", "meaning": "less" },
+    { "word": "می‌شود (mishavad)", "meaning": "becomes" },
+
+    { "word": "و (va)", "meaning": "and" },
+    { "word": "خورشید (khorshid)", "meaning": "sun" },
+    { "word": "ظاهر (zâher)", "meaning": "appears" },
+    { "word": "می‌شود (mishavad)", "meaning": "becomes" }
+  ]
+}
+  },
+  "dari":{
+    "story1": {
+  "title": "یک روز در پارک (yak ruz dar park)",
+  "content": [
+    { "word": "یک (yak)", "meaning": "a" },
+    { "word": "روز (ruz)", "meaning": "day" },
+    { "word": "زیبا (zibâ)", "meaning": "beautiful" },
+
+    { "word": "یک (yak)", "meaning": "a" },
+    { "word": "پسر (pesar)", "meaning": "boy" },
+    { "word": "کوچک (kuchak)", "meaning": "small" },
+    { "word": "به (ba)", "meaning": "to" },
+    { "word": "پارک (park)", "meaning": "park" },
+    { "word": "رفت (raft)", "meaning": "went" },
+
+    { "word": "او (u)", "meaning": "he" },
+    { "word": "با (bâ)", "meaning": "with" },
+    { "word": "دوست (dust)", "meaning": "friend" },
+    { "word": "خود (khod)", "meaning": "his" },
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "پارک (park)", "meaning": "park" },
+    { "word": "بازی (bâzi)", "meaning": "play" },
+    { "word": "کرد (kard)", "meaning": "did" },
+
+    { "word": "آن‌ها (ânhâ)", "meaning": "they" },
+    { "word": "زیر (zir)", "meaning": "under" },
+    { "word": "درخت (derakht)", "meaning": "tree" },
+    { "word": "بزرگ (bozorg)", "meaning": "big" },
+    { "word": "نشستند (neshastand)", "meaning": "sat" },
+
+    { "word": "پسر (pesar)", "meaning": "boy" },
+    { "word": "یک (yak)", "meaning": "a" },
+    { "word": "سیب (sib)", "meaning": "apple" },
+    { "word": "سرخ (sorkh)", "meaning": "red" },
+    { "word": "خورد (khord)", "meaning": "ate" },
+
+    { "word": "و (wa)", "meaning": "and" },
+    { "word": "آب (âb)", "meaning": "water" },
+    { "word": "نوشید (nushid)", "meaning": "drank" },
+
+    { "word": "آن‌ها (ânhâ)", "meaning": "they" },
+    { "word": "بسیار (bisyâr)", "meaning": "very" },
+    { "word": "خوشحال (khoshhâl)", "meaning": "happy" },
+    { "word": "بودند (budand)", "meaning": "were" }
+  ]
+},
+"story2": {
+  "title": "در مکتب (dar maktab)",
+  "content": [
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "هر (har)", "meaning": "every" },
+    { "word": "روز (ruz)", "meaning": "day" },
+    { "word": "به (ba)", "meaning": "to" },
+    { "word": "مکتب (maktab)", "meaning": "school" },
+    { "word": "می‌روم (miravam)", "meaning": "go" },
+
+    { "word": "مکتب (maktab)", "meaning": "school" },
+    { "word": "ما (mâ)", "meaning": "our" },
+    { "word": "بزرگ (bozorg)", "meaning": "big" },
+    { "word": "و (wa)", "meaning": "and" },
+    { "word": "زیبا (zibâ)", "meaning": "beautiful" },
+    { "word": "است (ast)", "meaning": "is" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "با (bâ)", "meaning": "with" },
+    { "word": "دوستان (dustân)", "meaning": "friends" },
+    { "word": "خود (khod)", "meaning": "my" },
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "صنف (senf)", "meaning": "class" },
+    { "word": "می‌نشینم (mineshinam)", "meaning": "sit" },
+
+    { "word": "معلم (mo'allem)", "meaning": "teacher" },
+    { "word": "ما (mâ)", "meaning": "our" },
+    { "word": "بسیار (bisyâr)", "meaning": "very" },
+    { "word": "خوب (khub)", "meaning": "good" },
+    { "word": "است (ast)", "meaning": "is" },
+
+    { "word": "او (u)", "meaning": "he/she" },
+    { "word": "به (ba)", "meaning": "to" },
+    { "word": "ما (mâ)", "meaning": "us" },
+    { "word": "درس (dars)", "meaning": "lesson" },
+    { "word": "می‌دهد (midahad)", "meaning": "teaches" },
+
+    { "word": "ما (mâ)", "meaning": "we" },
+    { "word": "کتاب (ketâb)", "meaning": "book" },
+    { "word": "می‌خوانیم (mikhânim)", "meaning": "read" },
+    { "word": "و (wa)", "meaning": "and" },
+    { "word": "می‌نویسیم (minevisim)", "meaning": "write" },
+
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "زنگ (zang)", "meaning": "break" },
+    { "word": "تفریح (tafrih)", "meaning": "playtime" },
+    { "word": "با (bâ)", "meaning": "with" },
+    { "word": "دوستان (dustân)", "meaning": "friends" },
+    { "word": "بازی (bâzi)", "meaning": "play" },
+    { "word": "می‌کنیم (mikonim)", "meaning": "do" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "مکتب (maktab)", "meaning": "school" },
+    { "word": "را (râ)", "meaning": "(object marker)" },
+    { "word": "بسیار (bisyâr)", "meaning": "very" },
+    { "word": "دوست (dust)", "meaning": "like" },
+    { "word": "دارم (dâram)", "meaning": "have" }
+  ]
+},
+"story3": {
+  "title": "در خانه (dar khâna)",
+  "content": [
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "خانه (khâna)", "meaning": "home" },
+    { "word": "خود (khod)", "meaning": "my" },
+    { "word": "هستم (hastam)", "meaning": "am" },
+
+    { "word": "خانه (khâna)", "meaning": "home" },
+    { "word": "ما (mâ)", "meaning": "our" },
+    { "word": "بزرگ (bozorg)", "meaning": "big" },
+    { "word": "و (wa)", "meaning": "and" },
+    { "word": "زیبا (zibâ)", "meaning": "beautiful" },
+    { "word": "است (ast)", "meaning": "is" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "با (bâ)", "meaning": "with" },
+    { "word": "فامیل (fâmil)", "meaning": "family" },
+    { "word": "خود (khod)", "meaning": "my" },
+    { "word": "زندگی (zendagi)", "meaning": "live" },
+    { "word": "می‌کنم (mikonam)", "meaning": "do" },
+
+    { "word": "مادر (mâdar)", "meaning": "mother" },
+    { "word": "من (man)", "meaning": "my" },
+    { "word": "غذا (ghazâ)", "meaning": "food" },
+    { "word": "می‌پزد (mipazad)", "meaning": "cooks" },
+
+    { "word": "پدر (pedar)", "meaning": "father" },
+    { "word": "من (man)", "meaning": "my" },
+    { "word": "کار (kâr)", "meaning": "work" },
+    { "word": "می‌کند (mikonad)", "meaning": "does" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "در (dar)", "meaning": "in" },
+    { "word": "اتاق (otâq)", "meaning": "room" },
+    { "word": "خود (khod)", "meaning": "my" },
+    { "word": "درس (dars)", "meaning": "study" },
+    { "word": "می‌خوانم (mikhânam)", "meaning": "read" },
+
+    { "word": "بعد (ba'd)", "meaning": "after" },
+    { "word": "از (az)", "meaning": "from" },
+    { "word": "آن (ân)", "meaning": "that" },
+    { "word": "تلویزیون (televizion)", "meaning": "television" },
+    { "word": "تماشا (tamâshâ)", "meaning": "watch" },
+    { "word": "می‌کنم (mikonam)", "meaning": "do" },
+
+    { "word": "من (man)", "meaning": "I" },
+    { "word": "خانه (khâna)", "meaning": "home" },
+    { "word": "را (râ)", "meaning": "(object marker)" },
+    { "word": "بسیار (bisyâr)", "meaning": "very" },
+    { "word": "دوست (dust)", "meaning": "like" },
+    { "word": "دارم (dâram)", "meaning": "have" }
+  ]
+}
+  },
+  "pashto": {
+  "story1": {
+    "title": "يوه ورځ په پارک کې (yawa wradz pa park ke)",
+    "content": [
+      { "word": "يوه (yawa)", "meaning": "a" },
+      { "word": "ورځ (wradz)", "meaning": "day" },
+      { "word": "ښکلی (shkali)", "meaning": "beautiful" },
+
+      { "word": "يو (yo)", "meaning": "a" },
+      { "word": "هلک (halak)", "meaning": "boy" },
+      { "word": "کوچنی (kochni)", "meaning": "small" },
+      { "word": "پارک (park)", "meaning": "park" },
+      { "word": "ته (ta)", "meaning": "to" },
+      { "word": "ولاړ (walaar)", "meaning": "went" },
+
+      { "word": "هغه (haga)", "meaning": "he" },
+      { "word": "له (la)", "meaning": "with" },
+      { "word": "خپل (khpal)", "meaning": "his" },
+      { "word": "ملګري (malgari)", "meaning": "friend" },
+      { "word": "سره (sara)", "meaning": "with" },
+      { "word": "لوبې (lobe)", "meaning": "play" },
+      { "word": "وکړې (wakre)", "meaning": "did" },
+
+      { "word": "هغوی (haghoi)", "meaning": "they" },
+      { "word": "د (da)", "meaning": "of" },
+      { "word": "لوی (loy)", "meaning": "big" },
+      { "word": "ونې (wone)", "meaning": "tree" },
+      { "word": "لاندې (lande)", "meaning": "under" },
+      { "word": "کیناستل (kenastel)", "meaning": "sat" },
+
+      { "word": "هلک (halak)", "meaning": "boy" },
+      { "word": "يو (yo)", "meaning": "a" },
+      { "word": "مڼه (mana)", "meaning": "apple" },
+      { "word": "سره (sara)", "meaning": "red" },
+      { "word": "وخوده (wakhoda)", "meaning": "ate" },
+
+      { "word": "او (ao)", "meaning": "and" },
+      { "word": "اوبه (oba)", "meaning": "water" },
+      { "word": "وڅښلې (wtsakhle)", "meaning": "drank" },
+
+      { "word": "هغوی (haghoi)", "meaning": "they" },
+      { "word": "ډېر (der)", "meaning": "very" },
+      { "word": "خوشحال (khushal)", "meaning": "happy" },
+      { "word": "وو (woo)", "meaning": "were" }
+    ]
+  },
+  "story2": {
+  "title": "په ښوونځي کې (pa shkounzai ke)",
+  "content": [
+    { "word": "زه (za)", "meaning": "I" },
+    { "word": "هره (hara)", "meaning": "every" },
+    { "word": "ورځ (wradz)", "meaning": "day" },
+    { "word": "ښوونځي (shkounzai)", "meaning": "school" },
+    { "word": "ته (ta)", "meaning": "to" },
+    { "word": "ځم (zam)", "meaning": "go" },
+
+    { "word": "زموږ (zmozh)", "meaning": "our" },
+    { "word": "ښوونځی (shkounzai)", "meaning": "school" },
+    { "word": "لوی (loy)", "meaning": "big" },
+    { "word": "او (ao)", "meaning": "and" },
+    { "word": "ښکلی (shkali)", "meaning": "beautiful" },
+    { "word": "دی (dey)", "meaning": "is" },
+
+    { "word": "زه (za)", "meaning": "I" },
+    { "word": "له (la)", "meaning": "with" },
+    { "word": "خپلو (khpalo)", "meaning": "my" },
+    { "word": "ملګرو (malgaro)", "meaning": "friends" },
+    { "word": "سره (sara)", "meaning": "with" },
+    { "word": "په (pa)", "meaning": "in" },
+    { "word": "ټولګي (tolgi)", "meaning": "class" },
+    { "word": "کې (ke)", "meaning": "in" },
+    { "word": "کېنم (kenam)", "meaning": "sit" },
+
+    { "word": "زموږ (zmozh)", "meaning": "our" },
+    { "word": "استاد (ustad)", "meaning": "teacher" },
+    { "word": "ډېر (der)", "meaning": "very" },
+    { "word": "ښه (kha)", "meaning": "good" },
+    { "word": "دی (dey)", "meaning": "is" },
+
+    { "word": "هغه (haga)", "meaning": "he/she" },
+    { "word": "موږ (mogh)", "meaning": "us" },
+    { "word": "ته (ta)", "meaning": "to" },
+    { "word": "درس (dars)", "meaning": "lesson" },
+    { "word": "راکوي (rakawi)", "meaning": "teaches" },
+
+    { "word": "موږ (mogh)", "meaning": "we" },
+    { "word": "کتاب (kitab)", "meaning": "book" },
+    { "word": "لولو (lolo)", "meaning": "read" },
+    { "word": "او (ao)", "meaning": "and" },
+    { "word": "لیکو (liko)", "meaning": "write" },
+
+    { "word": "په (pa)", "meaning": "in" },
+    { "word": "تفریح (tafrih)", "meaning": "break" },
+    { "word": "کې (ke)", "meaning": "in" },
+    { "word": "له (la)", "meaning": "with" },
+    { "word": "ملګرو (malgaro)", "meaning": "friends" },
+    { "word": "سره (sara)", "meaning": "with" },
+    { "word": "لوبې (lobe)", "meaning": "play" },
+    { "word": "کوو (kawo)", "meaning": "do" },
+
+    { "word": "زه (za)", "meaning": "I" },
+    { "word": "ښوونځی (shkounzai)", "meaning": "school" },
+    { "word": "ډېر (der)", "meaning": "very" },
+    { "word": "خوښوم (khwakhom)", "meaning": "like" }
+  ]
+},
+"story3": {
+  "title": "په کور کې (pa kor ke)",
+  "content": [
+    { "word": "زه (za)", "meaning": "I" },
+    { "word": "په (pa)", "meaning": "in" },
+    { "word": "کور (kor)", "meaning": "home" },
+    { "word": "کې (ke)", "meaning": "in" },
+    { "word": "یم (yam)", "meaning": "am" },
+
+    { "word": "زموږ (zmozh)", "meaning": "our" },
+    { "word": "کور (kor)", "meaning": "home" },
+    { "word": "لوی (loy)", "meaning": "big" },
+    { "word": "او (ao)", "meaning": "and" },
+    { "word": "ښکلی (shkali)", "meaning": "beautiful" },
+    { "word": "دی (dey)", "meaning": "is" },
+
+    { "word": "زه (za)", "meaning": "I" },
+    { "word": "له (la)", "meaning": "with" },
+    { "word": "خپل (khpal)", "meaning": "my" },
+    { "word": "کورنۍ (koranay)", "meaning": "family" },
+    { "word": "سره (sara)", "meaning": "with" },
+    { "word": "ژوند (zhwand)", "meaning": "life" },
+    { "word": "کوم (kom)", "meaning": "live" },
+
+    { "word": "مور (mor)", "meaning": "mother" },
+    { "word": "زما (zma)", "meaning": "my" },
+    { "word": "خواړه (khwara)", "meaning": "food" },
+    { "word": "پخوي (pakhawi)", "meaning": "cooks" },
+
+    { "word": "پلار (plar)", "meaning": "father" },
+    { "word": "زما (zma)", "meaning": "my" },
+    { "word": "کار (kar)", "meaning": "work" },
+    { "word": "کوي (kawi)", "meaning": "does" },
+
+    { "word": "زه (za)", "meaning": "I" },
+    { "word": "په (pa)", "meaning": "in" },
+    { "word": "خپله (khpala)", "meaning": "my" },
+    { "word": "خونه (khona)", "meaning": "room" },
+    { "word": "کې (ke)", "meaning": "in" },
+    { "word": "درس (dars)", "meaning": "study" },
+    { "word": "لولو (lolo)", "meaning": "read" },
+
+    { "word": "وروسته (wrosta)", "meaning": "after" },
+    { "word": "له (la)", "meaning": "from" },
+    { "word": "هغه (haga)", "meaning": "that" },
+    { "word": "تلویزیون (televizion)", "meaning": "television" },
+    { "word": "ګورم (goram)", "meaning": "watch" },
+
+    { "word": "زه (za)", "meaning": "I" },
+    { "word": "کور (kor)", "meaning": "home" },
+    { "word": "ډېر (der)", "meaning": "very" },
+    { "word": "خوښوم (khwakhom)", "meaning": "like" }
+  ]
+}
+}
+  }
+}

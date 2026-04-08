@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search | FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="back-btn" onclick="goBack()">⬅ Back</button>
+
+<div class="container">
+  <h1>Word Search 🔍</h1>
+
+  <p>
+    Search by meaning (English)<br>
+    (e.g. <b>hello</b>, <b>eat</b>, <b>school</b>)
+  </p>
+
+  <input 
+    type="text" 
+    id="searchInput" 
+     class="search-input"
+    placeholder="Type meaning (e.g. hello, food, go)"
+  >
+
+  <button class="search-btn" onclick="search()">Search</button>
+
+  <div id="results"></div>
+</div>
+
+<script src="search.js"></script>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+</body>
+</html>
