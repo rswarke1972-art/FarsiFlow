@@ -213,6 +213,8 @@ window.playFullPoem = function() {
 
 window.stopPoemSpeech = function() {
   speechSynthesis.cancel();
+  // Also stop the Google TTS audio element (used on mobile without Farsi TTS voice)
+  if (activeTTSAudio) { activeTTSAudio.pause(); activeTTSAudio = null; }
   isPlaying = false;
   currentPlayingVerseIndex = -1;
   playPoemBtn.innerText = "▶ Listen";
@@ -220,20 +222,28 @@ window.stopPoemSpeech = function() {
   document.querySelectorAll(".word").forEach(w => w.classList.remove("active"));
 };
 
-// Mobile-safe: returns a Promise resolving to the loaded voices list
+// Mobile-safe: waits for voices with a 1.5s timeout (voiceschanged may never fire on mobile)
 function getVoicesAsync() {
   return new Promise(resolve => {
     const voices = speechSynthesis.getVoices();
-    if (voices.length > 0) {
-      resolve(voices);
-    } else {
-      speechSynthesis.addEventListener("voiceschanged", function handler() {
+    if (voices.length > 0) { resolve(voices); return; }
+    let settled = false;
+    const timeout = setTimeout(() => {
+      if (!settled) { settled = true; resolve(speechSynthesis.getVoices()); }
+    }, 1500);
+    speechSynthesis.addEventListener("voiceschanged", function handler() {
+      if (!settled) {
+        settled = true;
+        clearTimeout(timeout);
         speechSynthesis.removeEventListener("voiceschanged", handler);
         resolve(speechSynthesis.getVoices());
-      });
-    }
+      }
+    });
   });
 }
+
+// Track active TTS audio element for mobile fallback
+let activeTTSAudio = null;
 
 async function speakVerseChain() {
   if (!isPlaying || currentPlayingVerseIndex >= poem.verses.length) {
@@ -243,54 +253,66 @@ async function speakVerseChain() {
   
   const verse = poem.verses[currentPlayingVerseIndex];
   
-  // Highlight the entire current verse row background subtly
+  // Highlight the entire current verse row
   document.querySelectorAll(".verse-row").forEach(r => r.style.borderColor = "var(--bg-accent)");
   const activeRow = document.getElementById(`verse-row-${currentPlayingVerseIndex}`);
-  if (activeRow) {
-    activeRow.style.borderColor = "var(--color-primary)";
-  }
+  if (activeRow) activeRow.style.borderColor = "var(--color-primary)";
   
-  speechUtterance = new SpeechSynthesisUtterance(verse.farsi);
-  speechUtterance.lang = "fa-IR";
-  speechUtterance.rate = parseFloat(speechSpeed.value);
-
   const voices = await getVoicesAsync();
   const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
+
   if (faVoice) {
+    // Device has a Farsi TTS voice — use Web Speech API with word highlighting
+    speechUtterance = new SpeechSynthesisUtterance(verse.farsi);
+    speechUtterance.lang = "fa-IR";
+    speechUtterance.rate = parseFloat(speechSpeed.value);
     speechUtterance.voice = faVoice;
-  }
-  // On mobile without a Farsi voice, device TTS uses the lang="fa-IR" hint
-  // Handle active word highlighting onSpeechBoundary
-  speechUtterance.onboundary = (event) => {
-    if (event.name !== "word") return;
-    
-    const textSoFar = verse.farsi.substring(0, event.charIndex);
-    const wordCount = textSoFar.split(/\s+/).filter(Boolean).length;
-    
-    // Clear highlights on this verse row
-    document.querySelectorAll(`.word[id^="word-${currentPlayingVerseIndex}-"]`).forEach(w => {
-      w.classList.remove("active");
+
+    speechUtterance.onboundary = (event) => {
+      if (event.name !== "word") return;
+      const textSoFar = verse.farsi.substring(0, event.charIndex);
+      const wordCount = textSoFar.split(/\s+/).filter(Boolean).length;
+      document.querySelectorAll(`.word[id^="word-${currentPlayingVerseIndex}-"]`).forEach(w => w.classList.remove("active"));
+      const targetWordSpan = document.getElementById(`word-${currentPlayingVerseIndex}-${wordCount}`);
+      if (targetWordSpan) targetWordSpan.classList.add("active");
+    };
+
+    speechUtterance.onend = () => {
+      currentPlayingVerseIndex++;
+      speakVerseChain();
+    };
+
+    speechUtterance.onerror = (e) => {
+      console.error("SpeechSynthesis error:", e);
+      stopPoemSpeech();
+    };
+
+    speechSynthesis.speak(speechUtterance);
+
+  } else {
+    // No Farsi voice on device (common on phones) — use Google Translate TTS audio
+    if (activeTTSAudio) { activeTTSAudio.pause(); activeTTSAudio = null; }
+    const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=fa&client=tw-ob&q=${encodeURIComponent(verse.farsi)}`;
+    const audio = new Audio();
+    audio.src = ttsUrl;
+    activeTTSAudio = audio;
+
+    audio.onended = () => {
+      if (!isPlaying) return;
+      currentPlayingVerseIndex++;
+      speakVerseChain();
+    };
+
+    audio.onerror = () => {
+      console.warn("TTS audio failed for verse", currentPlayingVerseIndex);
+      stopPoemSpeech();
+    };
+
+    audio.play().catch(err => {
+      console.warn("TTS audio play blocked:", err);
+      stopPoemSpeech();
     });
-    
-    // Highlight active spoken word span
-    const targetWordSpan = document.getElementById(`word-${currentPlayingVerseIndex}-${wordCount}`);
-    if (targetWordSpan) {
-      targetWordSpan.classList.add("active");
-    }
-  };
-
-  speechUtterance.onend = () => {
-    // Proceed to next verse
-    currentPlayingVerseIndex++;
-    speakVerseChain();
-  };
-
-  speechUtterance.onerror = (e) => {
-    console.error("SpeechSynthesis error:", e);
-    stopPoemSpeech();
-  };
-
-  speechSynthesis.speak(speechUtterance);
+  }
 }
 
 // ===== CALLIGRAPHY WRITING CANVAS =====
