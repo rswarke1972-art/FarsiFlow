@@ -68,15 +68,8 @@ function speakTarget() {
   const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
   if (faVoice) {
     utterance.voice = faVoice;
-    speechSynthesis.speak(utterance);
-  } else {
-    const cleanText = encodeURIComponent(text.trim());
-    const audio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&tl=fa&client=tw-ob&q=${cleanText}`);
-    audio.play().catch(err => {
-      console.warn("Audio fallback failed:", err);
-      speechSynthesis.speak(utterance);
-    });
   }
+  speechSynthesis.speak(utterance);
 }
 
 // ===== INITIALIZE LESSON =====
