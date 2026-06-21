@@ -220,7 +220,22 @@ window.stopPoemSpeech = function() {
   document.querySelectorAll(".word").forEach(w => w.classList.remove("active"));
 };
 
-function speakVerseChain() {
+// Mobile-safe: returns a Promise resolving to the loaded voices list
+function getVoicesAsync() {
+  return new Promise(resolve => {
+    const voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
+      resolve(voices);
+    } else {
+      speechSynthesis.addEventListener("voiceschanged", function handler() {
+        speechSynthesis.removeEventListener("voiceschanged", handler);
+        resolve(speechSynthesis.getVoices());
+      });
+    }
+  });
+}
+
+async function speakVerseChain() {
   if (!isPlaying || currentPlayingVerseIndex >= poem.verses.length) {
     stopPoemSpeech();
     return;
@@ -239,12 +254,12 @@ function speakVerseChain() {
   speechUtterance.lang = "fa-IR";
   speechUtterance.rate = parseFloat(speechSpeed.value);
 
-  const voices = speechSynthesis.getVoices();
+  const voices = await getVoicesAsync();
   const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
   if (faVoice) {
     speechUtterance.voice = faVoice;
   }
-
+  // On mobile without a Farsi voice, device TTS uses the lang="fa-IR" hint
   // Handle active word highlighting onSpeechBoundary
   speechUtterance.onboundary = (event) => {
     if (event.name !== "word") return;

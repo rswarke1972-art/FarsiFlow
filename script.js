@@ -93,36 +93,42 @@ function setExample(id, example) {
 
 
 // ===== SOUND =====
-function playSound() {
+
+// Mobile-safe: returns a Promise resolving to the loaded voices list
+function getVoicesAsync() {
+  return new Promise(resolve => {
+    const voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
+      resolve(voices);
+    } else {
+      speechSynthesis.addEventListener("voiceschanged", function handler() {
+        speechSynthesis.removeEventListener("voiceschanged", handler);
+        resolve(speechSynthesis.getVoices());
+      });
+    }
+  });
+}
+
+async function playSound() {
   if (!charObj) return;
 
-  // If the sound value contains slashes (like 'â / a'), default to the first variant or standard char name
   const textToSpeak = charObj.char || charObj.isolated;
   if (!textToSpeak) return;
 
   // Cancel any ongoing speech
   speechSynthesis.cancel();
 
-  const voices = speechSynthesis.getVoices();
+  const voices = await getVoicesAsync();
   const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
 
+  const utterance = new SpeechSynthesisUtterance(textToSpeak);
+  utterance.lang = "fa-IR";
   if (faVoice) {
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.lang = "fa-IR";
     utterance.voice = faVoice;
-    speechSynthesis.speak(utterance);
-  } else {
-    // Fallback: Google Translate TTS API which is highly reliable for Persian alphabet pronunciations
-    const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=fa&client=tw-ob&q=${encodeURIComponent(textToSpeak)}`;
-    const audio = new Audio(ttsUrl);
-    audio.play().catch(err => {
-      console.warn("Audio playback failed, trying fallback to native SpeechSynthesis:", err);
-      // Absolute fallback: try standard SpeechSynthesis anyway
-      const utterance = new SpeechSynthesisUtterance(textToSpeak);
-      utterance.lang = "fa-IR";
-      speechSynthesis.speak(utterance);
-    });
   }
+  // On mobile without a Farsi voice, the device will use its default TTS engine
+  // which still respects the lang="fa-IR" hint
+  speechSynthesis.speak(utterance);
 }
 
 // ===== FORM SELECTIONS & CANVAS COUPLING =====

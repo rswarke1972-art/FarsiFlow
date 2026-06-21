@@ -55,15 +55,32 @@ function initKeyboard() {
 }
 
 // ===== SPEECH SYNTHESIS =====
-function speakTarget() {
+
+// Mobile-safe: returns a Promise resolving to the loaded voices list
+function getVoicesAsync() {
+  return new Promise(resolve => {
+    const voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
+      resolve(voices);
+    } else {
+      speechSynthesis.addEventListener("voiceschanged", function handler() {
+        speechSynthesis.removeEventListener("voiceschanged", handler);
+        resolve(speechSynthesis.getVoices());
+      });
+    }
+  });
+}
+
+async function speakTarget() {
   speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(currentWordObj.word);
   utterance.lang = "fa-IR";
-  const voices = speechSynthesis.getVoices();
+  const voices = await getVoicesAsync();
   const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
   if (faVoice) {
     utterance.voice = faVoice;
   }
+  // On mobile without a Farsi voice, device TTS uses the lang="fa-IR" hint
   speechSynthesis.speak(utterance);
 }
 
