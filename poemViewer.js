@@ -213,7 +213,10 @@ window.playFullPoem = function() {
 
 window.stopPoemSpeech = function() {
   speechSynthesis.cancel();
-  // Also stop ResponsiveVoice if it's active (used on mobile)
+  if (window.currentPoemAudio) {
+    window.currentPoemAudio.pause();
+    window.currentPoemAudio = null;
+  }
   if (typeof responsiveVoice !== 'undefined') responsiveVoice.cancel();
   isPlaying = false;
   currentPlayingVerseIndex = -1;
@@ -223,8 +226,8 @@ window.stopPoemSpeech = function() {
 };
 
 // ===== SPEECH ENGINE =====
-// ResponsiveVoice-first: works on iOS & Android without installed TTS voices.
-// Native speechSynthesis fallback for desktop.
+// Native speechSynthesis with Farsi voice pack support.
+// Google Translate TTS fallback for mobile devices without installed Farsi voices.
 
 function speakVerseChain() {
   if (!isPlaying || currentPlayingVerseIndex >= poem.verses.length) {
@@ -241,27 +244,15 @@ function speakVerseChain() {
 
   const rate = parseFloat(speechSpeed.value);
 
-  if (typeof responsiveVoice !== 'undefined' && responsiveVoice.voiceSupport()) {
-    // ResponsiveVoice: works on mobile without any installed Farsi TTS voice
-    responsiveVoice.speak(verse.farsi, "Persian Female", {
-      rate: rate,
-      onend: () => {
-        if (!isPlaying) return;
-        currentPlayingVerseIndex++;
-        speakVerseChain();
-      },
-      onerror: () => stopPoemSpeech()
-    });
+  const voices = speechSynthesis.getVoices();
+  const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
 
-  } else {
-    // Fallback: native Web Speech API (desktop)
+  if (faVoice) {
+    // Desktop / Supported Native TTS path
     speechUtterance = new SpeechSynthesisUtterance(verse.farsi);
     speechUtterance.lang = "fa-IR";
     speechUtterance.rate = rate;
-
-    const voices = speechSynthesis.getVoices();
-    const faVoice = voices.find(v => v.lang.startsWith("fa"));
-    if (faVoice) speechUtterance.voice = faVoice;
+    speechUtterance.voice = faVoice;
 
     speechUtterance.onboundary = (event) => {
       if (event.name !== "word") return;
@@ -283,6 +274,32 @@ function speakVerseChain() {
     };
 
     speechSynthesis.speak(speechUtterance);
+  } else {
+    // Fallback: Google Translate TTS via Audio object
+    if (window.currentPoemAudio) {
+      window.currentPoemAudio.pause();
+    }
+    const cleanText = encodeURIComponent(verse.farsi.trim());
+    const audio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&tl=fa&client=tw-ob&q=${cleanText}`);
+    window.currentPoemAudio = audio;
+    audio.play().then(() => {
+      audio.onended = () => {
+        if (!isPlaying) return;
+        currentPlayingVerseIndex++;
+        speakVerseChain();
+      };
+    }).catch(err => {
+      console.error("Google TTS playback error:", err);
+      // Final fallback attempting default SpeechSynthesis anyway
+      speechUtterance = new SpeechSynthesisUtterance(verse.farsi);
+      speechUtterance.lang = "fa-IR";
+      speechUtterance.rate = rate;
+      speechUtterance.onend = () => {
+        currentPlayingVerseIndex++;
+        speakVerseChain();
+      };
+      speechSynthesis.speak(speechUtterance);
+    });
   }
 }
 

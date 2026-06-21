@@ -101,21 +101,22 @@ function playSound() {
   const textToSpeak = charObj.char || charObj.isolated;
   if (!textToSpeak) return;
 
-  // ResponsiveVoice: works on iOS & Android without any installed TTS voices
-  if (typeof responsiveVoice !== 'undefined' && responsiveVoice.voiceSupport()) {
-    responsiveVoice.cancel();
-    responsiveVoice.speak(textToSpeak, "Persian Female", { rate: 0.9 });
-    return;
-  }
-
-  // Fallback: native Web Speech API (desktop browsers with Farsi voices)
   speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(textToSpeak);
   utterance.lang = "fa-IR";
   const voices = speechSynthesis.getVoices();
-  const faVoice = voices.find(v => v.lang.startsWith("fa"));
-  if (faVoice) utterance.voice = faVoice;
-  speechSynthesis.speak(utterance);
+  const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
+  if (faVoice) {
+    utterance.voice = faVoice;
+    speechSynthesis.speak(utterance);
+  } else {
+    const cleanText = encodeURIComponent(textToSpeak.trim());
+    const audio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&tl=fa&client=tw-ob&q=${cleanText}`);
+    audio.play().catch(err => {
+      console.warn("Audio fallback failed:", err);
+      speechSynthesis.speak(utterance);
+    });
+  }
 }
 
 // ===== FORM SELECTIONS & CANVAS COUPLING =====
