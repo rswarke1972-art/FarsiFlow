@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poetry Game | FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0ea5e9">
+</head>
+<body>
+
+<button class="back-btn" onclick="goBack()">← Back</button>
+
+<div class="container">
+  <h1>🧠 Poetry Memorization Game</h1>
+  <p>Fill in the missing words from classical verses to lock them into your memory.</p>
+
+  <div class="typing-container">
+    <div class="target-text-card">
+      <h3 id="gamePoemTitle" style="color:var(--color-primary); font-family:var(--font-arabic);">Poem...</h3>
+      <h2 id="scoreDisplay" style="margin-bottom: 15px;">Score: 0</h2>
+      
+      <!-- Incomplete verse line -->
+      <div id="incompleteVerse" class="target-arabic" style="font-size: 26px; line-height: 1.8;">Loading verse...</div>
+      <div id="verseTranslation" class="target-meaning" style="margin-top: 10px;">Translation goes here...</div>
+    </div>
+
+    <!-- Options grid buttons -->
+    <div class="level-buttons" id="optionsGrid" style="width: 100%; max-width: 420px; margin-top: 15px;">
+      <!-- Option buttons will be dynamically generated here -->
+    </div>
+
+    <!-- Next Question Button -->
+    <button id="nextQuestionBtn" onclick="generateQuestion()" style="display:none; background: var(--color-success); max-width: 200px; margin-top: 20px;">
+      Next Verse ➔
+    </button>
+  </div>
+</div>
+
+<script src="poetryGame.js"></script>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+<script src="layout.js"></script>
+</body>
+</html>

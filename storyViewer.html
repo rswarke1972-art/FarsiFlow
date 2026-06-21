@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Story | FarsiFlow</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0ea5e9">
 </head>
 
 <body>
@@ -13,8 +16,34 @@
 <div class="container">
   <h1 id="storyTitle">📖 Story</h1>
 
+  <!-- Chapter Navigation Bar -->
+  <div id="chapterNav" class="chapter-nav-header" style="display:none;">
+    <div class="chapter-controls">
+      <button id="prevChapterBtn" class="nav-btn" onclick="prevChapter()">← Prev</button>
+      <select id="chapterSelect" class="chapter-select" onchange="onChapterSelectChange()"></select>
+      <button id="nextChapterBtn" class="nav-btn" onclick="nextChapter()">Next →</button>
+    </div>
+    <div class="progress-container">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+  </div>
+
   <!-- Story content -->
   <div id="storyContainer" dir="rtl"></div>
+
+  <!-- Chapter Vocabulary -->
+  <div id="vocabularySection" class="vocabulary-section" style="display:none;">
+    <h3>📝 Chapter Vocabulary</h3>
+    <div id="vocabGrid" class="vocab-grid"></div>
+  </div>
+
+  <!-- Related Poetry Integration -->
+  <div id="relatedPoetCard" class="related-poet-card" style="display:none;">
+    <div class="related-poet-header">Related Poet & Work</div>
+    <div id="relatedPoetName" class="related-poet-info"></div>
+    <div id="relatedPoetWork" class="related-poet-work"></div>
+    <a id="relatedPoetLink" href="#" class="poet-link-btn">Explore Poet's Work 🌹</a>
+  </div>
 </div>
 
 <!-- Popup -->
@@ -27,6 +56,6 @@ function goBack() {
   window.history.back();
 }
 </script>
-
+<script src="layout.js"></script>
 </body>
 </html>

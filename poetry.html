@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poetry Library | FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0ea5e9">
+</head>
+<body>
+
+<button class="back-btn" onclick="goBack()">← Back</button>
+
+<div class="container">
+  <h1>🌹 Persian Poetry Library</h1>
+  <p>Immerse yourself in Persian culture through timeless verses. Learn pronunciation, word-by-word meanings, and memorization.</p>
+
+  <!-- Section 1: Poet Explorer -->
+  <h2>🏛 Poet Explorer</h2>
+  <p>Select a legendary poet to read their profile:</p>
+  <div class="poetry-grid" id="poetsContainer"></div>
+
+  <hr>
+
+  <!-- Section 2: Poem Categories -->
+  <h2>📜 Explore Poems</h2>
+  <div class="tabs-container">
+    <div class="tab-item active" onclick="filterCategory('all')">All</div>
+    <div class="tab-item" onclick="filterCategory('Beginner')">Beginner</div>
+    <div class="tab-item" onclick="filterCategory('Intermediate')">Intermediate</div>
+    <div class="tab-item" onclick="filterCategory('Advanced')">Advanced</div>
+    <div class="tab-item" onclick="filterCategory('Classical')">Classical</div>
+    <div class="tab-item" onclick="filterCategory('Modern')">Modern</div>
+  </div>
+
+  <div id="poemsContainer"></div>
+</div>
+
+<!-- Poet Explorer Profile Detail Modal -->
+<div id="popup" style="display:none;"></div>
+
+<script src="poetry.js"></script>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+<script src="layout.js"></script>
+</body>
+</html>

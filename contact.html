@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | FarsiFlow</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0ea5e9">
 </head>
 
 <body>
@@ -20,21 +22,27 @@
   </p>
 
   <!-- Optional: RTL Persian feel -->
-  <form id="contactForm" dir="rtl">
-    <div class="contact-form">
+  <div class="contact-card">
+    <form id="contactForm" dir="rtl">
+      <div class="contact-group">
+        <label for="name">نام شما (Your Name)</label>
+        <input type="text" id="name" class="contact-input" placeholder="Enter your name" required>
+      </div>
 
-  <input type="text" placeholder="Your Name">
+      <div class="contact-group">
+        <label for="email">ایمیل شما (Your Email)</label>
+        <input type="email" id="email" class="contact-input" placeholder="username@example.com" required>
+      </div>
 
-  <input type="email" placeholder="Your Email">
+      <div class="contact-group">
+        <label for="message">پیام شما (Your Message)</label>
+        <textarea id="message" class="contact-textarea" placeholder="Type your message here..." required></textarea>
+      </div>
 
-  <textarea placeholder="Your Message"></textarea>
-
-  <button class="contact-btn">Send Message</button>
-
-</div>
-  </form>
-
-  <p id="status"></p>
+      <button type="submit" class="contact-form-btn">ارسال پیام / Send Message 🚀</button>
+    </form>
+    <div id="status" class="contact-status"></div>
+  </div>
 </div>
 
 <!-- EmailJS -->
@@ -53,6 +61,6 @@ function goBack() {
   window.history.back();
 }
 </script>
-
+<script src="layout.js"></script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poem Reader | FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0ea5e9">
+</head>
+<body>
+
+<button class="back-btn" onclick="goBack()">← Back</button>
+
+<div class="container">
+  <h1 id="poemTitle" style="font-family: var(--font-arabic); direction: rtl; text-align: center;">Loading Poem...</h1>
+  <p id="poemSubtitle" style="margin-top:-8px; margin-bottom: 20px; font-weight:600; color: var(--color-primary);">by...</p>
+
+  <!-- Audio playback settings bar -->
+  <div class="audio-controls-panel">
+    <div class="audio-buttons">
+      <button onclick="playFullPoem()" id="playPoemBtn" style="width:auto; padding:8px 16px; margin:0; background: var(--color-success);">▶ Listen</button>
+      <button onclick="stopPoemSpeech()" id="stopPoemBtn" style="width:auto; padding:8px 16px; margin:0; background: var(--color-error); display:none;">⏹ Stop</button>
+    </div>
+    <div class="speed-control">
+      <span>Speed:</span>
+      <input type="range" id="speechSpeed" min="0.4" max="1.2" step="0.2" value="1.0" onchange="updateSpeedDisplay()">
+      <span id="speedValue">1.0x</span>
+    </div>
+  </div>
+
+  <!-- Poetry Verses List Container -->
+  <div class="poem-viewer-container" id="poemVersesContainer"></div>
+
+  <hr>
+
+  <!-- Calligraphy Tracing Canvas Section -->
+  <h2>🎨 Calligraphy Tracing</h2>
+  <p>Practice writing elegant Persian script from the poem. Drag your mouse or swipe your finger to trace over the characters.</p>
+
+  <div class="canvas-wrapper">
+    <canvas id="tracingCanvas" width="380" height="280"></canvas>
+    <div class="canvas-guidance" id="canvasGuidance">عشق</div>
+  </div>
+  
+  <div class="canvas-controls">
+    <button onclick="clearCanvas()" style="background: var(--bg-accent);">🧹 Clear</button>
+    <button onclick="toggleGuidanceWord()" style="background: var(--color-primary);">🔄 Change Word</button>
+  </div>
+</div>
+
+<!-- Word detailed bottom sheet definitions modal -->
+<div id="popup" style="display:none;"></div>
+
+<script src="poemViewer.js"></script>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+<script src="layout.js"></script>
+</body>
+</html>

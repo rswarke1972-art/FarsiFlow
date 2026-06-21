@@ -11,22 +11,22 @@ function sendMessage(event) {
 
   // ===== VALIDATION =====
   if (!name || !email || !message) {
-    status.innerText = "⚠️ Please fill all fields.";
-    status.style.color = "orange";
+    status.innerText = "⚠️ لطفاً همه فیلدها را پر کنید / Please fill all fields.";
+    status.style.color = "var(--color-warning)";
     return;
   }
 
   // ✅ Better email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    status.innerText = "⚠️ Please enter a valid email.";
-    status.style.color = "orange";
+    status.innerText = "⚠️ لطفاً یک ایمیل معتبر وارد کنید / Please enter a valid email.";
+    status.style.color = "var(--color-warning)";
     return;
   }
 
   // ===== UI LOCK =====
   button.disabled = true;
-  button.innerText = "Sending...";
+  button.innerText = "ارسال در حال انجام / Sending...";
   status.innerText = "";
   
   const params = { name, email, message };
@@ -37,18 +37,18 @@ function sendMessage(event) {
     params
   )
   .then(() => {
-    status.innerText = "✅ Message sent successfully!";
-    status.style.color = "lightgreen";
+    status.innerText = "✅ پیام شما با موفقیت ارسال شد / Message sent successfully!";
+    status.style.color = "var(--color-success)";
     form.reset();
   })
   .catch((error) => {
-    status.innerText = "❌ Failed to send message. Try again.";
-    status.style.color = "red";
+    status.innerText = "❌ خطا در ارسال پیام / Failed to send message. Try again.";
+    status.style.color = "var(--color-error)";
     console.error(error);
   })
   .finally(() => {
     button.disabled = false;
-    button.innerText = "Send Message";
+    button.innerText = "ارسال پیام / Send Message 🚀";
   });
 }
 

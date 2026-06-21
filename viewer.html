@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Viewer | FarsiFlow</title>
   <link rel="stylesheet" href="style.css">
@@ -8,8 +9,8 @@
 
 <body>
 
-<!-- 🎵 Background Music -->
-<audio id="bgMusic" autoplay loop>
+<!-- 🎵 Background Music (No autoplay to prevent browser blocking errors) -->
+<audio id="bgMusic" loop>
   <source src="flute.mp3" type="audio/mpeg">
 </audio>
 
@@ -18,7 +19,7 @@
 <div class="container">
 
   <!-- 🎵 Music Toggle -->
-  <button class="action-btn" onclick="toggleMusic()">🎵 Music</button>
+  <button id="musicToggleBtn" class="action-btn" onclick="toggleMusic()">🔇 Music: OFF</button>
 
   <!-- 🔥 MAIN VIEWER CARD -->
   <div class="viewer-card">
@@ -30,36 +31,52 @@
     <p id="infoDisplay" class="info-text"></p>
 
     <!-- 🧩 FORMS -->
+    <!-- 🧩 FORMS -->
     <div class="forms-container">
 
       <!-- Isolated -->
-      <div class="form-card">
+      <div class="form-card" id="isoCardContainer">
         <h3>Isolated</h3>
         <div class="form-char" id="isoChar"></div>
         <p id="isoExample" class="example-text"></p>
       </div>
 
       <!-- Initial -->
-      <div class="form-card">
+      <div class="form-card" id="initCardContainer">
         <h3>Initial</h3>
         <div class="form-char" id="initChar"></div>
         <p id="initExample" class="example-text"></p>
       </div>
 
       <!-- Medial -->
-      <div class="form-card">
+      <div class="form-card" id="medCardContainer">
         <h3>Medial</h3>
         <div class="form-char" id="medChar"></div>
         <p id="medExample" class="example-text"></p>
       </div>
 
       <!-- Final -->
-      <div class="form-card">
+      <div class="form-card" id="finCardContainer">
         <h3>Final</h3>
         <div class="form-char" id="finChar"></div>
         <p id="finExample" class="example-text"></p>
       </div>
 
+    </div>
+
+    <!-- ✍️ Character Tracing Practice -->
+    <hr>
+    <h2>✍️ Character Tracing Practice</h2>
+    <p>Practice writing each form of this letter. Select a form card above, then trace over the shape below.</p>
+    
+    <div class="canvas-wrapper">
+      <canvas id="tracingCanvas" width="380" height="280"></canvas>
+      <div class="canvas-guidance" id="canvasGuidance"></div>
+    </div>
+    
+    <div class="canvas-controls">
+      <button onclick="clearCanvas()" style="background: var(--bg-accent); padding: 10px 16px; margin: 0; width: auto;">🧹 Clear</button>
+      <button onclick="resetCanvasState()" style="background: var(--color-primary); padding: 10px 16px; margin: 0; width: auto;">🔄 Reset Form</button>
     </div>
 
     <!-- 🔊 ACTION -->
@@ -76,12 +93,45 @@ function goBack() {
   window.history.back();
 }
 
-function toggleMusic() {
-  const music = document.getElementById("bgMusic");
-  if (music.paused) music.play();
-  else music.pause();
-}
-</script>
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicToggleBtn");
 
+function updateMusicBtn(isPlaying) {
+  if (musicBtn) {
+    musicBtn.innerText = isPlaying ? "🎵 Music: ON" : "🔇 Music: OFF";
+  }
+}
+
+function toggleMusic() {
+  if (music.paused) {
+    music.play().then(() => {
+      localStorage.setItem("musicEnabled", "true");
+      updateMusicBtn(true);
+    }).catch(err => console.log("Playback blocked by browser:", err));
+  } else {
+    music.pause();
+    localStorage.setItem("musicEnabled", "false");
+    updateMusicBtn(false);
+  }
+}
+
+// Check saved music preference on load
+document.addEventListener("DOMContentLoaded", () => {
+  const musicEnabled = localStorage.getItem("musicEnabled") === "true";
+  if (musicEnabled) {
+    // Try to play; note that browsers might still block until user clicks/taps
+    music.play().then(() => {
+      updateMusicBtn(true);
+    }).catch(err => {
+      console.log("Autoplay blocked. Waiting for user interaction.");
+      updateMusicBtn(false);
+    });
+  } else {
+    updateMusicBtn(false);
+  }
+});
+
+</script>
+<script src="layout.js"></script>
 </body>
 </html>

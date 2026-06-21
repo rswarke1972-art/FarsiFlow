@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Practice | FarsiFlow</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0ea5e9">
+</head>
+<body>
+
+<button class="back-btn" onclick="goBack()">← Back</button>
+
+<div class="container">
+  <h1>Keyboard Practice ⌨️</h1>
+  <p>Practice typing Persian characters and words to learn their keyboard layouts. Tap keys below or type on your physical keyboard!</p>
+
+  <div class="typing-container">
+    <!-- Target word display card -->
+    <div class="target-text-card">
+      <div id="targetWordArabic" class="target-arabic">سلام</div>
+      <div id="targetWordMeaning" class="target-meaning">meaning: Hello</div>
+      
+      <!-- TTS speaker -->
+      <button class="action-btn" onclick="speakTarget()" style="max-width: 140px; padding: 6px 12px; font-size: 13px; margin: 10px auto 0;">🔊 Pronounce</button>
+    </div>
+
+    <!-- Letter by letter character slot indicator boxes -->
+    <div id="feedbackContainer" class="input-feedback-display"></div>
+
+    <!-- Hidden standard input to trigger mobile keyboards -->
+    <input type="text" id="keyboardInput" style="position: absolute; opacity: 0; pointer-events: none; z-index: -1;" autocomplete="off" autofocus>
+    
+    <!-- Tap to focus instruction -->
+    <button class="action-btn" id="focusInputBtn" onclick="focusInputField()" style="max-width: 200px; background: var(--bg-secondary); border: 1px solid var(--bg-accent); color: var(--text-primary);">
+      Tap to Start Typing
+    </button>
+
+    <div id="completionMessage" style="display:none; color: var(--color-success); font-weight: bold; margin: 10px; font-size: 18px;">
+      🎉 Excellent! Word matched!
+    </div>
+
+    <!-- Interactive Persian Virtual Keyboard Helper -->
+    <div class="virtual-keyboard" id="virtualKeyboard">
+      <!-- Keys will be dynamically rendered or laid out here -->
+    </div>
+  </div>
+</div>
+
+<script src="typing.js"></script>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+<script src="layout.js"></script>
+</body>
+</html>

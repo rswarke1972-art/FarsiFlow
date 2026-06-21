@@ -3,7 +3,7 @@ let allCharacters = [];
 let allWords = [];
 let currentQuestion;
 let correctAnswer;
-let score = 0;
+let score = parseInt(localStorage.getItem("quizScore") || "0");
 
 // ===== QUIZ TYPE =====
 const quizType = localStorage.getItem("quizType") || "charToSound";
@@ -47,6 +47,7 @@ async function loadData() {
 
     console.log("Words:", allWords.length);
 
+    document.getElementById("score").innerText = "Score: " + score;
     nextQuestion();
 
   } catch (err) {
@@ -111,20 +112,24 @@ function nextQuestion() {
 // ===== GENERATE OPTIONS =====
 function generateOptions() {
   let options = [correctAnswer];
+  let attempts = 0;
+  const maxAttempts = 150;
 
-  while (options.length < 4) {
+  // Identify maximum possible options
+  let poolSize = quizType.includes("char") ? allCharacters.length : allWords.length;
+  let targetLimit = Math.min(4, poolSize);
+
+  while (options.length < targetLimit && attempts < maxAttempts) {
+    attempts++;
     let value;
 
     if (quizType.includes("char")) {
       let rand = randomFrom(allCharacters);
-
       value = quizType === "charToSound"
         ? rand.sound
         : getRandomForm(rand);
-
     } else {
       let rand = randomFrom(allWords);
-
       value = quizType === "wordToMeaning"
         ? rand.meaning
         : cleanWord(rand.word);
@@ -143,9 +148,7 @@ function generateOptions() {
   options.forEach(option => {
     let btn = document.createElement("button");
     btn.innerText = option;
-
     btn.onclick = () => checkAnswer(option);
-
     optionsDiv.appendChild(btn);
   });
 }
@@ -153,6 +156,7 @@ function generateOptions() {
 // ===== CHECK ANSWER =====
 function checkAnswer(selected) {
   let result = document.getElementById("result");
+  const buttons = document.querySelectorAll("#options button");
 
   if (selected === correctAnswer) {
     score++;
@@ -164,11 +168,19 @@ function checkAnswer(selected) {
     result.style.color = "red";
   }
 
+  localStorage.setItem("quizScore", score);
   document.getElementById("score").innerText = "Score: " + score;
   document.getElementById("nextBtn").style.display = "block";
 
-  document.querySelectorAll("#options button").forEach(btn => {
+  buttons.forEach(btn => {
     btn.disabled = true;
+    if (btn.innerText === correctAnswer) {
+      btn.style.background = "#22c55e"; // green for correct
+      btn.style.color = "black";
+    } else if (btn.innerText === selected && selected !== correctAnswer) {
+      btn.style.background = "#ef4444"; // red for incorrect selection
+      btn.style.color = "white";
+    }
   });
 }
 

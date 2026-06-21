@@ -1,0 +1,57 @@
+{
+  "name": "FarsiFlow — Learn Persian",
+  "short_name": "FarsiFlow",
+  "description": "Learn Persian (Farsi) alphabets, vocabulary, stories, and poetry with interactive tools.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0ea5e9",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "categories": ["education", "language"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Poetry Library",
+      "short_name": "Poetry",
+      "description": "Browse Persian poems",
+      "url": "./poetry.html",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Alphabet Practice",
+      "short_name": "Alphabet",
+      "description": "Learn Farsi letters",
+      "url": "./characters.html",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Stories",
+      "short_name": "Stories",
+      "description": "Read Persian stories",
+      "url": "./stories.html",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

@@ -1,23 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FarsiFlow</title>
+  <title>FarsiFlow — Learn Persian</title>
+  <meta name="description" content="Learn Persian (Farsi) alphabets, vocabulary, stories, and poetry with interactive tools. Free language learning PWA.">
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FarsiFlow">
 </head>
 
 <body>
 
   <div class="container">
     <h1>FarsiFlow 🇮🇷</h1>
+    <p id="currentDialect" style="font-weight: 600; font-size: 14px; margin-bottom: 20px; color: var(--color-primary);"></p>
+
+    <!-- Daily Verse Card -->
+    <div class="daily-verse-card" id="dailyVerseCard" style="display:none;">
+      <h3>Daily Verse 🌹</h3>
+      <div id="dailyVerseArabic" class="daily-verse-arabic">...</div>
+      <div id="dailyVerseTranslation" class="daily-verse-translation" style="display:none;">...</div>
+      <div class="daily-verse-actions">
+        <button class="action-btn" onclick="speakDailyVerse()" style="padding:6px 12px; font-size:12px; margin:0;">🔊 Speak</button>
+        <button class="action-btn" onclick="toggleDailyVerseTranslation()" style="padding:6px 12px; font-size:12px; margin:0; background:var(--bg-accent);">Translate</button>
+      </div>
+    </div>
+
+    <!-- Continue Reading Progress Card -->
+    <div class="continue-reading-card" id="continueReadingCard" style="display:none;">
+      <h3>Continue Reading 📖</h3>
+      <div id="continueReadingTitle" class="continue-reading-title"></div>
+      <div id="continueReadingDetails" class="continue-reading-details"></div>
+      <div class="continue-reading-progress-container">
+        <div id="continueReadingProgressBar" class="continue-reading-progress-bar"></div>
+      </div>
+      <button class="continue-reading-btn" onclick="resumeReading()">Resume Progress →</button>
+    </div>
 
     <div class="level-buttons">
+
 
       <!-- Characters Section -->
       <button onclick="openCharacters()">Alphabet 🔤</button>
 
       <!-- Dialects Section -->
       <button onclick="goToStories()">Story Mode 📖</button>
+
+      <!-- New Features -->
+      <button onclick="location.href='typing.html'">Keyboard Practice ⌨️</button>
+      <button onclick="location.href='poetry.html'">Poetry Library 🌹</button>
 
       <hr>
 
@@ -41,9 +79,61 @@
     };
 
     document.getElementById("currentDialect").innerText =
-      "Current: " + (dialectNames[dialect] || "Farsi");
+      "Selected Language: " + (dialectNames[dialect] || "Farsi");
 
+    // ===== LOAD SAVED PROGRESS =====
+    function loadReadingProgress() {
+      const card = document.getElementById("continueReadingCard");
+      const lastStoryKey = localStorage.getItem("lastReadStoryKey");
+      if (!lastStoryKey) {
+        card.style.display = "none";
+        return;
+      }
+      
+      const progressSaved = localStorage.getItem("readingProgress_" + lastStoryKey);
+      if (!progressSaved) {
+        card.style.display = "none";
+        return;
+      }
+      
+      try {
+        const progress = JSON.parse(progressSaved);
+        
+        if (progress && progress.title) {
+          let title = progress.title;
+          if (title.includes("(")) {
+            title = title.split("(")[0].trim();
+          }
+          
+          document.getElementById("continueReadingTitle").innerText = title;
+          
+          const chDisplay = progress.chapter >= 0 ? progress.chapter + 1 : 1;
+          const totalChapters = progress.chaptersCount || 1;
+          const scrollPercent = progress.scroll || 0;
+          
+          document.getElementById("continueReadingDetails").innerText = 
+            `Chapter ${chDisplay} of ${totalChapters} • ${scrollPercent}% complete`;
+            
+          const overallPercent = Math.round(((progress.chapter + (scrollPercent / 100)) / totalChapters) * 100);
+          document.getElementById("continueReadingProgressBar").style.width = overallPercent + "%";
+          
+          card.style.display = "block";
+          
+          window.resumeReading = function() {
+            localStorage.setItem("currentStory", lastStoryKey);
+            window.location.href = "storyViewer.html";
+          };
+        } else {
+          card.style.display = "none";
+        }
+      } catch (err) {
+        console.error("Error loading reading progress:", err);
+        card.style.display = "none";
+      }
+    }
 
+    // Call progress loader on startup
+    loadReadingProgress();
 
     function openCharacters() {
       localStorage.setItem("level", "basic");
@@ -51,10 +141,66 @@
     }
 
     function goToStories() {
-  window.location.href = "dialect.html";
-}
+      window.location.href = "dialect.html";
+    }
+
+    // ===== DAILY VERSE CONTROLLER =====
+    let dailyVerseText = "";
+    
+    async function loadDailyVerse() {
+      try {
+        const res = await fetch("poetry_farsi.json");
+        const json = await res.json();
+        if (json.poems && json.poems.length > 0) {
+          // Use day of the year to pick a stable verse index
+          const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+          const poem = json.poems[dayOfYear % json.poems.length];
+          const verse = poem.verses[dayOfYear % poem.verses.length];
+          
+          dailyVerseText = verse.farsi;
+          
+          document.getElementById("dailyVerseArabic").innerText = verse.farsi;
+          document.getElementById("dailyVerseTranslation").innerText = verse.english;
+          document.getElementById("dailyVerseCard").style.display = "block";
+        }
+      } catch (e) {
+        console.log("Could not load daily verse:", e);
+      }
+    }
+
+    window.speakDailyVerse = function() {
+      if (!dailyVerseText) return;
+      speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(dailyVerseText);
+      utterance.lang = "fa-IR";
+      const voices = speechSynthesis.getVoices();
+      const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
+      if (faVoice) {
+        utterance.voice = faVoice;
+      }
+      speechSynthesis.speak(utterance);
+    };
+
+    window.toggleDailyVerseTranslation = function() {
+      const el = document.getElementById("dailyVerseTranslation");
+      if (el) {
+        el.style.display = el.style.display === "none" ? "block" : "none";
+      }
+    };
+
+    // Load Daily Verse on startup
+    loadDailyVerse();
+
+    // ===== SERVICE WORKER REGISTRATION =====
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js")
+          .then(reg => console.log("Service Worker registered!", reg))
+          .catch(err => console.log("Service Worker registration failed:", err));
+      });
+    }
 
   </script>
-
+  <script src="layout.js"></script>
 </body>
 </html>

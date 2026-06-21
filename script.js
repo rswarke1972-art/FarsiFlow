@@ -25,6 +25,8 @@ fetch(`data_farsi.json`)
     }
 
     loadCharacter(charObj);
+    initFormSelection();
+    initCanvas();
   })
   .catch(err => {
     console.error("Failed to load data", err);
@@ -92,10 +94,168 @@ function setExample(id, example) {
 
 // ===== SOUND =====
 function playSound() {
-  if (!charObj || !charObj.sound) return;
+  if (!charObj) return;
 
-  const utterance = new SpeechSynthesisUtterance(charObj.sound);
-  utterance.lang = "fa-IR";
+  // If the sound value contains slashes (like 'â / a'), default to the first variant or standard char name
+  const textToSpeak = charObj.char || charObj.isolated;
+  if (!textToSpeak) return;
 
-  speechSynthesis.speak(utterance);
+  // Cancel any ongoing speech
+  speechSynthesis.cancel();
+
+  const voices = speechSynthesis.getVoices();
+  const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
+
+  if (faVoice) {
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = "fa-IR";
+    utterance.voice = faVoice;
+    speechSynthesis.speak(utterance);
+  } else {
+    // Fallback: Google Translate TTS API which is highly reliable for Persian alphabet pronunciations
+    const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=fa&client=tw-ob&q=${encodeURIComponent(textToSpeak)}`;
+    const audio = new Audio(ttsUrl);
+    audio.play().catch(err => {
+      console.warn("Audio playback failed, trying fallback to native SpeechSynthesis:", err);
+      // Absolute fallback: try standard SpeechSynthesis anyway
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.lang = "fa-IR";
+      speechSynthesis.speak(utterance);
+    });
+  }
 }
+
+// ===== FORM SELECTIONS & CANVAS COUPLING =====
+let activeForm = 'isolated'; // default selected form
+
+function initFormSelection() {
+  const formCards = {
+    'isolated': { container: document.getElementById("isoCardContainer"), charEl: document.getElementById("isoChar") },
+    'initial': { container: document.getElementById("initCardContainer"), charEl: document.getElementById("initChar") },
+    'medial': { container: document.getElementById("medCardContainer"), charEl: document.getElementById("medChar") },
+    'final': { container: document.getElementById("finCardContainer"), charEl: document.getElementById("finChar") }
+  };
+
+  Object.keys(formCards).forEach(formKey => {
+    const card = formCards[formKey];
+    if (card.container) {
+      card.container.addEventListener("click", () => {
+        // Highlight active form card
+        Object.values(formCards).forEach(c => {
+          if (c.container) c.container.classList.remove("active");
+        });
+        card.container.classList.add("active");
+        
+        // Update activeForm and the canvas guidance overlay character
+        activeForm = formKey;
+        const charValue = card.charEl ? card.charEl.innerText : (charObj.char || "");
+        setCanvasGuidance(charValue);
+        clearCanvas();
+      });
+    }
+  });
+
+  // Set default active card
+  if (formCards['isolated'].container) {
+    formCards['isolated'].container.classList.add("active");
+    const defaultChar = formCards['isolated'].charEl ? formCards['isolated'].charEl.innerText : (charObj.char || "");
+    setCanvasGuidance(defaultChar);
+  }
+}
+
+function setCanvasGuidance(char) {
+  document.getElementById("canvasGuidance").innerText = char;
+}
+
+// ===== CALLIGRAPHY WRITING CANVAS =====
+let canvas, ctx;
+let drawing = false;
+
+function initCanvas() {
+  canvas = document.getElementById("tracingCanvas");
+  if (!canvas) return;
+  ctx = canvas.getContext("2d");
+  
+  // Drawing styles
+  ctx.strokeStyle = "#22c55e"; // Emerald brush
+  ctx.lineWidth = 10;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  // Mouse event listeners
+  canvas.addEventListener("mousedown", startDrawing);
+  canvas.addEventListener("mousemove", draw);
+  canvas.addEventListener("mouseup", stopDrawing);
+  canvas.addEventListener("mouseleave", stopDrawing);
+
+  // Mobile Touch event listeners
+  canvas.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    const mouseEvent = new MouseEvent("mousedown", {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+  }, { passive: false });
+
+  canvas.addEventListener("touchmove", (e) => {
+    e.preventDefault(); // Prevent standard scroll while tracing!
+    const touch = e.touches[0];
+    const mouseEvent = new MouseEvent("mousemove", {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+  }, { passive: false });
+
+  canvas.addEventListener("touchend", () => {
+    const mouseEvent = new MouseEvent("mouseup", {});
+    canvas.dispatchEvent(mouseEvent);
+  }, { passive: false });
+}
+
+function getMousePos(e) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (e.clientX - rect.left) * (canvas.width / rect.width),
+    y: (e.clientY - rect.top) * (canvas.height / rect.height)
+  };
+}
+
+function startDrawing(e) {
+  drawing = true;
+  const pos = getMousePos(e);
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+}
+
+function draw(e) {
+  if (!drawing) return;
+  const pos = getMousePos(e);
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+}
+
+function stopDrawing() {
+  drawing = false;
+  ctx.closePath();
+}
+
+window.clearCanvas = function() {
+  if (ctx && canvas) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+};
+
+window.resetCanvasState = function() {
+  clearCanvas();
+  // Simply flash/pulse active form guidance
+  const guidance = document.getElementById("canvasGuidance");
+  if (guidance) {
+    guidance.style.transition = "opacity 0.15s ease";
+    guidance.style.opacity = "0.4";
+    setTimeout(() => {
+      guidance.style.opacity = "0.15";
+    }, 150);
+  }
+};
