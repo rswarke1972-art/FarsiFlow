@@ -213,8 +213,8 @@ window.playFullPoem = function() {
 
 window.stopPoemSpeech = function() {
   speechSynthesis.cancel();
-  // Also stop the Google TTS audio element (used on mobile without Farsi TTS voice)
-  if (activeTTSAudio) { activeTTSAudio.pause(); activeTTSAudio = null; }
+  // Also stop ResponsiveVoice if it's active (used on mobile)
+  if (typeof responsiveVoice !== 'undefined') responsiveVoice.cancel();
   isPlaying = false;
   currentPlayingVerseIndex = -1;
   playPoemBtn.innerText = "▶ Listen";
@@ -222,51 +222,46 @@ window.stopPoemSpeech = function() {
   document.querySelectorAll(".word").forEach(w => w.classList.remove("active"));
 };
 
-// Mobile-safe: waits for voices with a 1.5s timeout (voiceschanged may never fire on mobile)
-function getVoicesAsync() {
-  return new Promise(resolve => {
-    const voices = speechSynthesis.getVoices();
-    if (voices.length > 0) { resolve(voices); return; }
-    let settled = false;
-    const timeout = setTimeout(() => {
-      if (!settled) { settled = true; resolve(speechSynthesis.getVoices()); }
-    }, 1500);
-    speechSynthesis.addEventListener("voiceschanged", function handler() {
-      if (!settled) {
-        settled = true;
-        clearTimeout(timeout);
-        speechSynthesis.removeEventListener("voiceschanged", handler);
-        resolve(speechSynthesis.getVoices());
-      }
-    });
-  });
-}
+// ===== SPEECH ENGINE =====
+// ResponsiveVoice-first: works on iOS & Android without installed TTS voices.
+// Native speechSynthesis fallback for desktop.
 
-// Track active TTS audio element for mobile fallback
-let activeTTSAudio = null;
-
-async function speakVerseChain() {
+function speakVerseChain() {
   if (!isPlaying || currentPlayingVerseIndex >= poem.verses.length) {
     stopPoemSpeech();
     return;
   }
-  
+
   const verse = poem.verses[currentPlayingVerseIndex];
-  
-  // Highlight the entire current verse row
+
+  // Highlight current verse row
   document.querySelectorAll(".verse-row").forEach(r => r.style.borderColor = "var(--bg-accent)");
   const activeRow = document.getElementById(`verse-row-${currentPlayingVerseIndex}`);
   if (activeRow) activeRow.style.borderColor = "var(--color-primary)";
-  
-  const voices = await getVoicesAsync();
-  const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
 
-  if (faVoice) {
-    // Device has a Farsi TTS voice — use Web Speech API with word highlighting
+  const rate = parseFloat(speechSpeed.value);
+
+  if (typeof responsiveVoice !== 'undefined' && responsiveVoice.voiceSupport()) {
+    // ResponsiveVoice: works on mobile without any installed Farsi TTS voice
+    responsiveVoice.speak(verse.farsi, "Persian Female", {
+      rate: rate,
+      onend: () => {
+        if (!isPlaying) return;
+        currentPlayingVerseIndex++;
+        speakVerseChain();
+      },
+      onerror: () => stopPoemSpeech()
+    });
+
+  } else {
+    // Fallback: native Web Speech API (desktop)
     speechUtterance = new SpeechSynthesisUtterance(verse.farsi);
     speechUtterance.lang = "fa-IR";
-    speechUtterance.rate = parseFloat(speechSpeed.value);
-    speechUtterance.voice = faVoice;
+    speechUtterance.rate = rate;
+
+    const voices = speechSynthesis.getVoices();
+    const faVoice = voices.find(v => v.lang.startsWith("fa"));
+    if (faVoice) speechUtterance.voice = faVoice;
 
     speechUtterance.onboundary = (event) => {
       if (event.name !== "word") return;
@@ -288,30 +283,6 @@ async function speakVerseChain() {
     };
 
     speechSynthesis.speak(speechUtterance);
-
-  } else {
-    // No Farsi voice on device (common on phones) — use Google Translate TTS audio
-    if (activeTTSAudio) { activeTTSAudio.pause(); activeTTSAudio = null; }
-    const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=fa&client=tw-ob&q=${encodeURIComponent(verse.farsi)}`;
-    const audio = new Audio();
-    audio.src = ttsUrl;
-    activeTTSAudio = audio;
-
-    audio.onended = () => {
-      if (!isPlaying) return;
-      currentPlayingVerseIndex++;
-      speakVerseChain();
-    };
-
-    audio.onerror = () => {
-      console.warn("TTS audio failed for verse", currentPlayingVerseIndex);
-      stopPoemSpeech();
-    };
-
-    audio.play().catch(err => {
-      console.warn("TTS audio play blocked:", err);
-      stopPoemSpeech();
-    });
   }
 }
 

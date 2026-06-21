@@ -94,60 +94,28 @@ function setExample(id, example) {
 
 // ===== SOUND =====
 
-// Mobile-safe: waits for voices to load, with a 1.5s timeout fallback
-// (voiceschanged may never fire on iOS/Android if no TTS voices are installed)
-function getVoicesAsync() {
-  return new Promise(resolve => {
-    const voices = speechSynthesis.getVoices();
-    if (voices.length > 0) {
-      resolve(voices);
-      return;
-    }
-    let settled = false;
-    const timeout = setTimeout(() => {
-      if (!settled) { settled = true; resolve(speechSynthesis.getVoices()); }
-    }, 1500);
-    speechSynthesis.addEventListener("voiceschanged", function handler() {
-      if (!settled) {
-        settled = true;
-        clearTimeout(timeout);
-        speechSynthesis.removeEventListener("voiceschanged", handler);
-        resolve(speechSynthesis.getVoices());
-      }
-    });
-  });
-}
-
-// Plays Persian text via Google Translate TTS audio element (works on mobile, no CORS issue)
-function playViaTTS(text) {
-  const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=fa&client=tw-ob&q=${encodeURIComponent(text)}`;
-  const audio = new Audio();
-  audio.src = ttsUrl;
-  audio.play().catch(err => console.warn("TTS audio fallback failed:", err));
-  return audio;
-}
-
-async function playSound() {
+// Speak Persian text — uses ResponsiveVoice on mobile (no installed voice needed),
+// falls back to native Web Speech API on desktop.
+function playSound() {
   if (!charObj) return;
-
   const textToSpeak = charObj.char || charObj.isolated;
   if (!textToSpeak) return;
 
-  speechSynthesis.cancel();
-
-  const voices = await getVoicesAsync();
-  const faVoice = voices.find(v => v.lang.startsWith("fa") || v.lang.startsWith("fa-IR"));
-
-  if (faVoice) {
-    // Device has a Farsi TTS voice — use it
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.lang = "fa-IR";
-    utterance.voice = faVoice;
-    speechSynthesis.speak(utterance);
-  } else {
-    // No Farsi voice on device (common on phones) — use Google Translate TTS audio
-    playViaTTS(textToSpeak);
+  // ResponsiveVoice: works on iOS & Android without any installed TTS voices
+  if (typeof responsiveVoice !== 'undefined' && responsiveVoice.voiceSupport()) {
+    responsiveVoice.cancel();
+    responsiveVoice.speak(textToSpeak, "Persian Female", { rate: 0.9 });
+    return;
   }
+
+  // Fallback: native Web Speech API (desktop browsers with Farsi voices)
+  speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(textToSpeak);
+  utterance.lang = "fa-IR";
+  const voices = speechSynthesis.getVoices();
+  const faVoice = voices.find(v => v.lang.startsWith("fa"));
+  if (faVoice) utterance.voice = faVoice;
+  speechSynthesis.speak(utterance);
 }
 
 // ===== FORM SELECTIONS & CANVAS COUPLING =====
