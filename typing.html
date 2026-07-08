@@ -14,16 +14,92 @@
 
 <div class="container">
   <h1>Keyboard Practice ⌨️</h1>
-  <p>Practice typing Persian characters and words to learn their keyboard layouts. Tap keys below or type on your physical keyboard!</p>
+  <p>Practice typing Persian characters, words, and full phrases to learn their keyboard layouts. Type on your physical keyboard or tap keys below!</p>
 
   <div class="typing-container">
+    
+    <!-- Dashboard Control Panel -->
+    <div class="control-panel-card">
+      <div class="control-row">
+        <div class="control-group">
+          <label for="categorySelector">Category</label>
+          <select id="categorySelector" onchange="changeCategory()">
+            <option value="words" selected>Words (7,500)</option>
+            <option value="phrases">Phrases (2,500)</option>
+            <option value="sentences">Sentences (1,000)</option>
+            <option value="alphabet">Alphabet Examples</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="lengthSelector">Length</label>
+          <select id="lengthSelector" onchange="changeFilter()">
+            <option value="all" selected>All Lengths</option>
+            <option value="short">Short (1-4 chars)</option>
+            <option value="medium">Medium (5-8 chars)</option>
+            <option value="long">Long (9+ chars)</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="control-row" style="margin-top: 12px; align-items: center; justify-content: space-between; gap: 10px;">
+        <div class="toggle-group">
+          <span class="toggle-label">QWERTY Emulator</span>
+          <label class="switch">
+            <input type="checkbox" id="emulatorToggle" onchange="toggleEmulator()">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <button class="action-btn text-btn" onclick="resetSession()" style="width: auto; padding: 6px 12px; font-size: 12px; margin: 0; background: var(--bg-accent); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--border-radius-sm);">🔄 Reset Session</button>
+      </div>
+    </div>
+
+    <!-- Search & Practice Bar -->
+    <div class="search-practice-container">
+      <div class="search-bar-row">
+        <input type="text" id="dictSearchInput" placeholder="🔍 Search 11,000+ entries to practice..." autocomplete="off" oninput="handleSearch()">
+        <button id="clearSearchBtn" class="clear-search-btn" onclick="clearSearch()" style="display: none;">×</button>
+      </div>
+      <div id="searchSuggestions" class="search-suggestions-dropdown" style="display: none;"></div>
+    </div>
+
+    <!-- Stats Dashboard -->
+    <div class="stats-dashboard">
+      <div class="stat-widget">
+        <span class="stat-value" id="statsWPM">0</span>
+        <span class="stat-label">WPM</span>
+      </div>
+      <div class="stat-widget">
+        <span class="stat-value" id="statsAccuracy">100%</span>
+        <span class="stat-label">Accuracy</span>
+      </div>
+      <div class="stat-widget">
+        <span class="stat-value" id="statsProgress">0/0</span>
+        <span class="stat-label">Session Progress</span>
+      </div>
+    </div>
+
+    <!-- View Options Toggles -->
+    <div class="view-options-row">
+      <label class="checkbox-container">
+        <input type="checkbox" id="showTranslationToggle" checked onchange="toggleViewOptions()">
+        <span class="checkbox-label">Show Translation</span>
+      </label>
+      <label class="checkbox-container">
+        <input type="checkbox" id="showTranslitToggle" checked onchange="toggleViewOptions()">
+        <span class="checkbox-label">Show Pronunciation</span>
+      </label>
+    </div>
+
     <!-- Target word display card -->
     <div class="target-text-card">
       <div id="targetWordArabic" class="target-arabic">سلام</div>
+      <div id="targetWordTranslit" class="target-translit">salâm</div>
       <div id="targetWordMeaning" class="target-meaning">meaning: Hello</div>
       
-      <!-- TTS speaker -->
-      <button class="action-btn" onclick="speakTarget()" style="max-width: 140px; padding: 6px 12px; font-size: 13px; margin: 10px auto 0;">🔊 Pronounce</button>
+      <div class="target-card-actions">
+        <button class="action-btn" onclick="speakTarget()" style="max-width: 130px; padding: 6px 12px; font-size: 13px; margin: 0;">🔊 Pronounce</button>
+        <button class="action-btn" id="skipWordBtn" onclick="skipWord()" style="max-width: 100px; padding: 6px 12px; font-size: 13px; margin: 0; background: var(--bg-accent);">Skip ➔</button>
+      </div>
     </div>
 
     <!-- Letter by letter character slot indicator boxes -->
@@ -33,12 +109,12 @@
     <input type="text" id="keyboardInput" style="position: absolute; opacity: 0; pointer-events: none; z-index: -1;" autocomplete="off" autofocus>
     
     <!-- Tap to focus instruction -->
-    <button class="action-btn" id="focusInputBtn" onclick="focusInputField()" style="max-width: 200px; background: var(--bg-secondary); border: 1px solid var(--bg-accent); color: var(--text-primary);">
-      Tap to Start Typing
+    <button class="action-btn" id="focusInputBtn" onclick="focusInputField()" style="max-width: 220px; background: var(--bg-secondary); border: 1px solid var(--bg-accent); color: var(--text-primary);">
+      ⌨️ Click Here to Focus Keyboard
     </button>
 
     <div id="completionMessage" style="display:none; color: var(--color-success); font-weight: bold; margin: 10px; font-size: 18px;">
-      🎉 Excellent! Word matched!
+      🎉 Excellent! Correct!
     </div>
 
     <!-- Interactive Persian Virtual Keyboard Helper -->
