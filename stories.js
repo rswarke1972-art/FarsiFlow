@@ -16,9 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ===== LOAD STORIES =====
-fetch("stories_farsi.json")
-  .then(res => res.json())
-  .then(json => {
+Promise.all([
+  fetch("stories_farsi_part1.json").then(res => res.json()),
+  fetch("stories_farsi_part2.json").then(res => res.json())
+])
+  .then(([part1, part2]) => {
+    // Merge both parts
+    const json = {
+      stories: {
+        farsi: {
+          ...part1.stories.farsi,
+          ...part2.stories.farsi
+        }
+      }
+    };
 
     const container = document.getElementById("storyList");
     container.innerHTML = "";

@@ -6,9 +6,20 @@ let currentChapterIndex = 0;
 let isRestoringScroll = false;
 
 // ===== LOAD STORY =====
-fetch("stories_farsi.json")
-  .then(res => res.json())
-  .then(data => {
+Promise.all([
+  fetch("stories_farsi_part1.json").then(res => res.json()),
+  fetch("stories_farsi_part2.json").then(res => res.json())
+])
+  .then(([part1, part2]) => {
+    // Merge both parts
+    const data = {
+      stories: {
+        farsi: {
+          ...part1.stories.farsi,
+          ...part2.stories.farsi
+        }
+      }
+    };
     currentStoryKey = localStorage.getItem("currentStory");
 
     console.log("Dialect:", dialect);
