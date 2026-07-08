@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz | FarsiFlow</title>
+  <meta name="description" content="Test your Farsi knowledge with letter, word, and phrase quizzes in FarsiFlow.">
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0ea5e9">
@@ -11,46 +12,65 @@
 
 <body>
 
-<button class="back-btn" onclick="goBack()">⬅ Back</button>
+<button class="back-btn" id="backBtn">⬅ Back</button>
 
-<div class="container">
-  <h1>Farsi Quiz 🧪</h1>
+<div class="container quiz-page-container">
+  <h1 class="page-title">Farsi Quiz 🧪</h1>
 
-  <!-- Quiz Type -->
-  <div class="quiz-types">
-    <button onclick="setQuizType('charToSound')">Letter → Sound</button>
-    <button onclick="setQuizType('soundToChar')">Sound → Letter</button>
-    
-    <!-- 🔥 NEW (for future word system) -->
-    <button onclick="setQuizType('wordToMeaning')">Word → Meaning</button>
-    <button onclick="setQuizType('meaningToWord')">Meaning → Word</button>
+  <!-- Stats Bar -->
+  <div class="stats-dashboard">
+    <div class="stat-widget">
+      <span class="stat-value" id="score">0</span>
+      <span class="stat-label">Score</span>
+    </div>
+    <div class="stat-widget">
+      <span class="stat-value" id="streakCount">0</span>
+      <span class="stat-label">🔥 Streak</span>
+    </div>
+    <div class="stat-widget">
+      <span class="stat-value" id="accuracyPct">—</span>
+      <span class="stat-label">Accuracy</span>
+    </div>
+    <div class="stat-widget" style="cursor:pointer;" onclick="resetScore()">
+      <span class="stat-value" style="font-size:16px;">↺</span>
+      <span class="stat-label">Reset</span>
+    </div>
   </div>
 
-  <h2 id="score">Score: 0</h2>
+  <!-- Quiz Type Selection -->
+  <div class="quiz-types" id="quizTypeBar">
+    <button class="quiz-type-btn" data-type="charToSound" onclick="setQuizType('charToSound')">🔤 Letter → Sound</button>
+    <button class="quiz-type-btn" data-type="soundToChar" onclick="setQuizType('soundToChar')">🔊 Sound → Letter</button>
+    <button class="quiz-type-btn" data-type="wordToMeaning" onclick="setQuizType('wordToMeaning')">📖 Word → Meaning</button>
+    <button class="quiz-type-btn" data-type="meaningToWord" onclick="setQuizType('meaningToWord')">💡 Meaning → Word</button>
+    <button class="quiz-type-btn" data-type="phraseToMeaning" onclick="setQuizType('phraseToMeaning')">💬 Phrase → Meaning</button>
+    <button class="quiz-type-btn" data-type="meaningToPhrase" onclick="setQuizType('meaningToPhrase')">🗨️ Meaning → Phrase</button>
+  </div>
 
-  <!-- Question -->
-  <h2 id="questionChar">?</h2>
+  <!-- Quiz Card -->
+  <div class="quiz-card">
+    <!-- Question Hint -->
+    <p id="questionHint" class="question-hint"></p>
 
-  <div id="options"></div>
+    <!-- Question Display -->
+    <div id="questionChar" class="question-display farsi-large">?</div>
 
-  <p id="result"></p>
+    <!-- Answer Options -->
+    <div id="options" class="options-grid"></div>
 
-  <button id="nextBtn" onclick="nextQuestion()" style="display:none;">
-    Next
-  </button>
+    <!-- Result Feedback -->
+    <p id="result" class="result-display"></p>
+
+    <!-- Next Button -->
+    <button id="nextBtn" onclick="nextQuestion()" style="display:none;" class="btn-primary btn-next">
+      Next Question →
+    </button>
+  </div>
 </div>
 
 <script src="quiz.js"></script>
-
 <script>
-function goBack() {
-  window.history.back();
-}
-
-function setQuizType(type) {
-  localStorage.setItem("quizType", type);
-  location.reload();
-}
+document.getElementById("backBtn").addEventListener("click", () => window.history.back());
 </script>
 <script src="layout.js"></script>
 </body>

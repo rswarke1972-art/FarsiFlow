@@ -1,138 +1,178 @@
-// ===== GLOBAL =====
+// ===== GLOBAL STATE =====
 let allCharacters = [];
 let allWords = [];
+let allPhrases = [];
 let currentQuestion;
 let correctAnswer;
 let score = parseInt(localStorage.getItem("quizScore") || "0");
+let streak = parseInt(localStorage.getItem("quizStreak") || "0");
+let totalAnswered = parseInt(localStorage.getItem("quizTotal") || "0");
+let correctTotal = parseInt(localStorage.getItem("quizCorrect") || "0");
 
 // ===== QUIZ TYPE =====
-const quizType = localStorage.getItem("quizType") || "charToSound";
-
-// ===== DIALECT =====
-const dialect = localStorage.getItem("selectedDialect") || "farsi";
+let quizType = localStorage.getItem("quizType") || "charToSound";
 
 // ===== LOAD DATA =====
 async function loadData() {
   try {
-    let res = await fetch("data_farsi.json"); // ✅ FIXED
-    let json = await res.json();
-
-    console.log("Loaded:", dialect, json);
-
-    // ===== CHARACTERS =====
-    if (json.characters) {
-      allCharacters = json.characters.filter(c => c.char);
+    // Load characters from data_farsi.json
+    const charRes = await fetch("data_farsi.json");
+    const charJson = await charRes.json();
+    if (charJson.characters) {
+      allCharacters = charJson.characters.filter(c => c.char && c.sound);
     }
+    console.log("Characters loaded:", allCharacters.length);
 
-    // ===== WORDS FROM STORIES =====
-    let wordsTemp = [];
+    // Load words & phrases from typing_database.json
+    const dbRes = await fetch("typing_database.json");
+    const dbJson = await dbRes.json();
+    allWords = (dbJson.words || []).filter(w => w.word && w.meaning);
+    allPhrases = (dbJson.phrases || []).filter(p => p.word && p.meaning);
+    console.log("Words loaded:", allWords.length, "Phrases loaded:", allPhrases.length);
 
-    if (json.stories && json.stories[dialect]) {
-      Object.values(json.stories[dialect]).forEach(story => {
-        story.content.forEach(wordObj => {
-          wordsTemp.push(wordObj);
-        });
-      });
-    }
-
-    // remove duplicates
-    const unique = new Map();
-    wordsTemp.forEach(w => {
-      if (!unique.has(w.word)) {
-        unique.set(w.word, w);
-      }
-    });
-
-    allWords = Array.from(unique.values());
-
-    console.log("Words:", allWords.length);
-
-    document.getElementById("score").innerText = "Score: " + score;
+    updateScoreDisplay();
+    setActiveType(quizType);
     nextQuestion();
 
   } catch (err) {
     console.error("Error loading data:", err);
+    showError("Failed to load quiz data. Make sure you're running from a local server.");
   }
+}
+
+// ===== DISPLAY ERROR =====
+function showError(msg) {
+  const container = document.querySelector(".quiz-container") || document.querySelector(".container");
+  if (container) {
+    container.innerHTML = `<div class="quiz-error"><p>⚠️ ${msg}</p></div>`;
+  }
+}
+
+// ===== SET QUIZ TYPE =====
+function setQuizType(type) {
+  quizType = type;
+  localStorage.setItem("quizType", type);
+  setActiveType(type);
+
+  // Reset question display
+  const resultEl = document.getElementById("result");
+  const nextBtn = document.getElementById("nextBtn");
+  if (resultEl) resultEl.textContent = "";
+  if (nextBtn) nextBtn.style.display = "none";
+
+  nextQuestion();
+}
+
+function setActiveType(type) {
+  document.querySelectorAll(".quiz-type-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.type === type);
+  });
 }
 
 // ===== GET RANDOM FORM =====
 function getRandomForm(obj) {
-  const forms = [
-    obj.isolated,
-    obj.initial,
-    obj.medial,
-    obj.final
-  ].filter(Boolean);
+  const forms = [obj.isolated, obj.initial, obj.medial, obj.final].filter(Boolean);
+  return forms.length > 0 ? forms[Math.floor(Math.random() * forms.length)] : obj.char;
+}
 
-  return forms.length > 0
-    ? forms[Math.floor(Math.random() * forms.length)]
-    : obj.char;
+// ===== GET POOL =====
+function getPool() {
+  if (quizType === "charToSound" || quizType === "soundToChar") return allCharacters;
+  if (quizType === "phraseToMeaning" || quizType === "meaningToPhrase") return allPhrases;
+  return allWords; // wordToMeaning, meaningToWord
 }
 
 // ===== GENERATE QUESTION =====
 function nextQuestion() {
-  document.getElementById("result").innerText = "";
-  document.getElementById("nextBtn").style.display = "none";
+  const resultEl = document.getElementById("result");
+  const nextBtn = document.getElementById("nextBtn");
+  const questionEl = document.getElementById("questionChar");
+  const questionHintEl = document.getElementById("questionHint");
 
-  let questionDisplay = document.getElementById("questionChar");
+  if (resultEl) resultEl.textContent = "";
+  if (nextBtn) nextBtn.style.display = "none";
+  if (questionHintEl) questionHintEl.textContent = "";
 
-  // 🔤 LETTER → SOUND
+  const pool = getPool();
+  if (pool.length === 0) {
+    if (questionEl) questionEl.textContent = "No data available for this quiz type.";
+    return;
+  }
+
+  currentQuestion = randomFrom(pool);
+
   if (quizType === "charToSound") {
-    currentQuestion = randomFrom(allCharacters);
-    questionDisplay.innerText = getRandomForm(currentQuestion);
+    if (questionEl) {
+      questionEl.textContent = getRandomForm(currentQuestion);
+      questionEl.className = "question-display farsi-large";
+    }
+    if (questionHintEl) questionHintEl.textContent = "What sound does this letter make?";
     correctAnswer = currentQuestion.sound;
 
-  // 🔊 SOUND → LETTER
   } else if (quizType === "soundToChar") {
-    currentQuestion = randomFrom(allCharacters);
-    questionDisplay.innerText = currentQuestion.sound;
+    if (questionEl) {
+      questionEl.textContent = currentQuestion.sound;
+      questionEl.className = "question-display latin-display";
+    }
+    if (questionHintEl) questionHintEl.textContent = "Which letter makes this sound?";
     correctAnswer = getRandomForm(currentQuestion);
 
-  // 📖 WORD → MEANING
   } else if (quizType === "wordToMeaning") {
-    currentQuestion = randomFrom(allWords);
-
-    let word = cleanWord(currentQuestion.word);
-    questionDisplay.innerText = word;
-
+    if (questionEl) {
+      questionEl.textContent = cleanWord(currentQuestion.word);
+      questionEl.className = "question-display farsi-large";
+    }
+    if (questionHintEl) questionHintEl.textContent = currentQuestion.translit ? `(${currentQuestion.translit})` : "";
     correctAnswer = currentQuestion.meaning;
 
-  // 💡 MEANING → WORD
   } else if (quizType === "meaningToWord") {
-    currentQuestion = randomFrom(allWords);
+    if (questionEl) {
+      questionEl.textContent = currentQuestion.meaning;
+      questionEl.className = "question-display latin-display";
+    }
+    if (questionHintEl) questionHintEl.textContent = "Type the Persian word";
+    correctAnswer = cleanWord(currentQuestion.word);
 
-    questionDisplay.innerText = currentQuestion.meaning;
+  } else if (quizType === "phraseToMeaning") {
+    if (questionEl) {
+      questionEl.textContent = cleanWord(currentQuestion.word);
+      questionEl.className = "question-display farsi-medium";
+    }
+    if (questionHintEl) questionHintEl.textContent = currentQuestion.translit ? `(${currentQuestion.translit})` : "";
+    correctAnswer = currentQuestion.meaning;
 
+  } else if (quizType === "meaningToPhrase") {
+    if (questionEl) {
+      questionEl.textContent = currentQuestion.meaning;
+      questionEl.className = "question-display latin-display";
+    }
+    if (questionHintEl) questionHintEl.textContent = "Choose the Persian phrase";
     correctAnswer = cleanWord(currentQuestion.word);
   }
 
-  generateOptions();
+  generateOptions(pool);
 }
 
 // ===== GENERATE OPTIONS =====
-function generateOptions() {
+function generateOptions(pool) {
   let options = [correctAnswer];
   let attempts = 0;
-  const maxAttempts = 150;
+  const maxAttempts = 200;
+  const targetCount = Math.min(4, pool.length);
 
-  // Identify maximum possible options
-  let poolSize = quizType.includes("char") ? allCharacters.length : allWords.length;
-  let targetLimit = Math.min(4, poolSize);
-
-  while (options.length < targetLimit && attempts < maxAttempts) {
+  while (options.length < targetCount && attempts < maxAttempts) {
     attempts++;
+    const rand = randomFrom(pool);
     let value;
 
-    if (quizType.includes("char")) {
-      let rand = randomFrom(allCharacters);
-      value = quizType === "charToSound"
-        ? rand.sound
-        : getRandomForm(rand);
+    if (quizType === "charToSound") {
+      value = rand.sound;
+    } else if (quizType === "soundToChar") {
+      value = getRandomForm(rand);
+    } else if (quizType === "wordToMeaning" || quizType === "phraseToMeaning") {
+      value = rand.meaning;
     } else {
-      let rand = randomFrom(allWords);
-      value = quizType === "wordToMeaning"
-        ? rand.meaning
-        : cleanWord(rand.word);
+      value = cleanWord(rand.word);
     }
 
     if (value && !options.includes(value)) {
@@ -140,14 +180,21 @@ function generateOptions() {
     }
   }
 
+  // Shuffle options
   options.sort(() => Math.random() - 0.5);
 
-  let optionsDiv = document.getElementById("options");
+  const optionsDiv = document.getElementById("options");
+  if (!optionsDiv) return;
   optionsDiv.innerHTML = "";
 
+  // Determine if answer is Farsi (for RTL styling)
+  const isFarsiAnswer = quizType === "soundToChar" || quizType === "meaningToWord" || quizType === "meaningToPhrase";
+
   options.forEach(option => {
-    let btn = document.createElement("button");
-    btn.innerText = option;
+    const btn = document.createElement("button");
+    btn.textContent = option;
+    btn.className = "option-btn" + (isFarsiAnswer ? " farsi-option" : "");
+    btn.setAttribute("data-value", option);
     btn.onclick = () => checkAnswer(option);
     optionsDiv.appendChild(btn);
   });
@@ -155,33 +202,79 @@ function generateOptions() {
 
 // ===== CHECK ANSWER =====
 function checkAnswer(selected) {
-  let result = document.getElementById("result");
-  const buttons = document.querySelectorAll("#options button");
+  const resultEl = document.getElementById("result");
+  const nextBtn = document.getElementById("nextBtn");
+  const buttons = document.querySelectorAll(".option-btn");
+
+  totalAnswered++;
+  localStorage.setItem("quizTotal", totalAnswered);
 
   if (selected === correctAnswer) {
     score++;
-    result.innerText = "✅ Correct!";
-    result.style.color = "lightgreen";
+    streak++;
+    correctTotal++;
+    localStorage.setItem("quizScore", score);
+    localStorage.setItem("quizStreak", streak);
+    localStorage.setItem("quizCorrect", correctTotal);
+
+    if (resultEl) {
+      resultEl.innerHTML = `✅ Correct! ${streak > 1 ? `<span class="streak-badge">🔥 ${streak} streak</span>` : ""}`;
+      resultEl.className = "result-display result-correct";
+    }
   } else {
-    score--;
-    result.innerText = `❌ Wrong! Correct: ${correctAnswer}`;
-    result.style.color = "red";
+    score = Math.max(0, score - 1);
+    streak = 0;
+    localStorage.setItem("quizScore", score);
+    localStorage.setItem("quizStreak", "0");
+
+    if (resultEl) {
+      resultEl.innerHTML = `❌ Wrong! Correct: <strong>${correctAnswer}</strong>`;
+      resultEl.className = "result-display result-wrong";
+    }
   }
 
-  localStorage.setItem("quizScore", score);
-  document.getElementById("score").innerText = "Score: " + score;
-  document.getElementById("nextBtn").style.display = "block";
+  updateScoreDisplay();
 
+  if (nextBtn) nextBtn.style.display = "inline-flex";
+
+  // Highlight buttons
   buttons.forEach(btn => {
     btn.disabled = true;
-    if (btn.innerText === correctAnswer) {
-      btn.style.background = "#22c55e"; // green for correct
-      btn.style.color = "black";
-    } else if (btn.innerText === selected && selected !== correctAnswer) {
-      btn.style.background = "#ef4444"; // red for incorrect selection
-      btn.style.color = "white";
+    const val = btn.getAttribute("data-value");
+    if (val === correctAnswer) {
+      btn.classList.add("btn-correct");
+    } else if (val === selected && selected !== correctAnswer) {
+      btn.classList.add("btn-wrong");
     }
   });
+}
+
+// ===== UPDATE SCORE DISPLAY =====
+function updateScoreDisplay() {
+  const scoreEl = document.getElementById("score");
+  const streakEl = document.getElementById("streakCount");
+  const accuracyEl = document.getElementById("accuracyPct");
+
+  if (scoreEl) scoreEl.textContent = score;
+  if (streakEl) streakEl.textContent = streak;
+  if (accuracyEl && totalAnswered > 0) {
+    accuracyEl.textContent = Math.round((correctTotal / totalAnswered) * 100) + "%";
+  } else if (accuracyEl) {
+    accuracyEl.textContent = "—";
+  }
+}
+
+// ===== RESET SCORE =====
+function resetScore() {
+  score = 0;
+  streak = 0;
+  totalAnswered = 0;
+  correctTotal = 0;
+  localStorage.setItem("quizScore", "0");
+  localStorage.setItem("quizStreak", "0");
+  localStorage.setItem("quizTotal", "0");
+  localStorage.setItem("quizCorrect", "0");
+  updateScoreDisplay();
 }
 
 // ===== HELPERS =====
